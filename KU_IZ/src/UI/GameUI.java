@@ -56,7 +56,14 @@ public class GameUI extends JPanel {
 
         JPanel answerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         answerInput = new JTextField("", 20);
+        answerInput.setPreferredSize(new Dimension(100, 40));
+        answerInput.setForeground(Color.BLACK);
+
         JButton submitBtn = new JButton("OK");
+        submitBtn.setPreferredSize(new Dimension(100, 40));
+        submitBtn.setBackground(new Color(0x3B5998));
+        submitBtn.setForeground(Color.BLACK);
+        submitBtn.setFocusPainted(false);
 
         submitBtn.addActionListener(e -> {
             // 정답 제출 로직
