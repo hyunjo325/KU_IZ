@@ -25,16 +25,21 @@ public class HostUI extends JFrame {
         cardLayout = new CardLayout();
         mainPanel = new JPanel(cardLayout);
 
-        // 주제 선택 및 방 개설 화면
-        JPanel createRoom = createRoom();
-        mainPanel.add(createRoom, "CreateRoom");
+        if (isHost) {
+            JPanel createRoom = createRoom();
+            mainPanel.add(createRoom, "CreateRoom");
+        }
 
-        // 게임 시작 대기 화면
         JPanel waitingRoom = waitingRoom();
         mainPanel.add(waitingRoom, "WaitingRoom");
 
         add(mainPanel);
         setVisible(true);
+
+        // 일반 참가자 -> 대기실
+        if (!isHost) {
+            cardLayout.show(mainPanel, "WaitingRoom");
+        }
     }
 
     private JPanel createRoom(){
@@ -184,6 +189,6 @@ public class HostUI extends JFrame {
 
     public static void main(String[] args) {
        new HostUI(true); // 방장
-        //new HostUI(false); // 참가자
+       // new HostUI(false); // 참가자
     }
 }
