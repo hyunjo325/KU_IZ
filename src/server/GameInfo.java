@@ -1,19 +1,19 @@
 package server;
 
 public class GameInfo {
-    private int subject;
+    private String subject;
     private boolean running = false;
 
     public GameInfo(){
-        this.subject = 0;
+        this.subject = "";
         this.running = false;
     }
 
-    public int getSubject() {
+    public String getSubject() {
         return subject;
     }
 
-    public void setSubject(int subject) {
+    public void setSubject(String subject) {
         this.subject = subject;
     }
 

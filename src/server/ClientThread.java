@@ -32,12 +32,13 @@ public class ClientThread extends Thread {
             System.out.println("System: " + username + " 접속.");
             synchronized (userVector){
                 userVector.add(userpair);
-                alertRoomEnter(usernum);
                 if (userVector.size() == 1){
                     isRoomOwner = true;
                     alertRoomOpen();
                     System.out.println("System: " + username + " 방장.");
                 }
+                alertRoomEnter(usernum);
+                alertPlayerUpdate();
             }
             running = true;
 
@@ -61,8 +62,9 @@ public class ClientThread extends Thread {
                 }
 
                 if (parseLine[0].equals("SUBJECT")){
-                    game.setSubject(Integer.parseInt(parseLine[1]));
+                    game.setSubject(parseLine[1]);
                     System.out.println("System: 게임 주제 설정 - " + parseLine[1]);
+                    sendall("SUBJECT#" + parseLine[1]);
                 }
 
                 if (parseLine[0].equals("START_GAME")){
@@ -81,9 +83,6 @@ public class ClientThread extends Thread {
                     }
                 }
 
-                else {
-                    sendmsg(line);
-                }
             }
         }
         catch (Exception e) { System.out.println(e); }
@@ -94,6 +93,7 @@ public class ClientThread extends Thread {
                 if (isRoomOwner && !userVector.isEmpty()){
                     newRoomOwner();
                 }
+                alertPlayerUpdate();
             }
             try{
                 if (sock != null){
@@ -108,6 +108,14 @@ public class ClientThread extends Thread {
         PrintWriter pwr = userpair.getPw();
         pwr.println("ENTER_ROOM#" + usernum);
         pwr.flush();
+    }
+
+    public void alertPlayerUpdate(){
+        String players = "PLAYER_UPDATE";
+        for (int i = 0; i < userVector.size(); i++){
+            players = players + "#" + userVector.get(i).getUsername();
+        }
+        sendall(players);
     }
 
     public void alertRoomOpen(){
