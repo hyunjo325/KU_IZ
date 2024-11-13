@@ -166,7 +166,7 @@ public class HostUI extends JFrame {
     }
 
     public void startGame() {
-        gameUI = new GameUI(userdata.getQuizTopic(), userdata.getPlayerList());
+        gameUI = new GameUI(userdata.getQuizTopic(), userdata.getPlayerList(),userdata.getIsRoomOwner(),sock, pw, br);
         mainPanel.add(gameUI, "GameUI");
         cardLayout.show(mainPanel, "GameUI");
         gameUI.startGame();
@@ -184,7 +184,9 @@ public class HostUI extends JFrame {
         playerListPanel.revalidate();
         playerListPanel.repaint();
     }
-
+    public GameUI getGameUI(){
+        return gameUI;
+    }
 
     private void styleTopPanel(JLabel topLabel) {
         topLabel.setOpaque(true);
@@ -203,6 +205,7 @@ public class HostUI extends JFrame {
         pw.println("START_GAME");
         pw.flush();
     }
+
 
 /*    public static void main(String[] args) {
        new HostUI(true); // 방장
