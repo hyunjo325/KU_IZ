@@ -1,5 +1,8 @@
 package server;
 
+import client.LineInfo;
+
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -17,6 +20,8 @@ public class ClientThread extends Thread {
     private boolean isRoomOwner = false;
     private UserPair userpair = null;
     private GameInfo game = null;
+
+    private final Vector<LineInfo> drawVector = new Vector<>();
 
     public ClientThread(Socket sock, Vector userVector, int usernum, GameInfo game){
         this.sock = sock;
@@ -56,6 +61,7 @@ public class ClientThread extends Thread {
                     break;
                 }
 
+                System.out.println(line);
                 if (parseLine[0].equals("NEW_ROOM_OWNER")){
                     isRoomOwner = true;
                     System.out.println("System: 방장이 바뀌었습니다: " + userpair.getUsername());
@@ -80,6 +86,22 @@ public class ClientThread extends Thread {
                         System.out.println("System: " + msg);
                         sendall("GAME_STARTED");
                         sendall(msg);
+                    }
+                }
+                if (parseLine[0].equals("DRAW")){
+                    synchronized (drawVector){
+                        if(parseLine[1].equals("NULL")){
+                            drawVector.add(null);
+                        }
+                        else if(parseLine[1].equals("CLEAR")){
+                            drawVector.clear();
+                        }
+                        else{
+                            Point p = new Point(Integer.parseInt(parseLine[1]),Integer.parseInt(parseLine[2]));
+                            LineInfo newLine = new LineInfo(p,Integer.parseInt(parseLine[3]));
+                            drawVector.add(newLine);
+                        }
+                        sendall(line);
                     }
                 }
 

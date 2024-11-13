@@ -4,7 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="변경" />
+    <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="feat: 이주혁님 작성 코드 복붙">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/GameThread.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/LobbyThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/client/LobbyThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/UserData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/client/UserData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/ClientThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/ClientThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/GameThread.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/GameUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/HostUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/HostUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/LobbyThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/LobbyThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +33,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -40,7 +57,7 @@
     &quot;Application.server.Main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;hj&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/hyunj/OneDrive/바탕 화면/4학년 2학기/네트워크프로그래밍/팀플/CatchMindClient&quot;,
@@ -52,6 +69,7 @@
     &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -60,9 +78,12 @@
       <recent name="C:\Users\hyunj\OneDrive\바탕 화면\4학년 2학기\네트워크프로그래밍\팀플\CatchMindClient\src\server" />
       <recent name="C:\Users\user\Desktop\LJH\University\JAVA\Network\CatchMindClient\src" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="server" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Main" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="CatchMindClient" />
       <method v="2">
@@ -82,6 +103,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.server.Main" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -113,6 +138,12 @@
       <workItem from="1731239324471" duration="45000" />
       <workItem from="1731239389886" duration="1428000" />
       <workItem from="1731377240039" duration="71000" />
+      <workItem from="1731377332280" duration="452000" />
+      <workItem from="1731377797639" duration="116000" />
+      <workItem from="1731377924926" duration="3056000" />
+      <workItem from="1731382395341" duration="1620000" />
+      <workItem from="1731425002370" duration="7000" />
+      <workItem from="1731466085149" duration="17560000" />
     </task>
     <task id="LOCAL-00001" summary="변경">
       <option name="closed" value="true" />
@@ -122,14 +153,34 @@
       <option name="project" value="LOCAL" />
       <updated>1731239944261</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat: 이주혁님 작성 코드 복붙">
+      <option name="closed" value="true" />
+      <created>1731377487432</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731377487432</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="변경" />
+    <MESSAGE value="feat: 이주혁님 작성 코드 복붙" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 이주혁님 작성 코드 복붙" />
   </component>
 </project>

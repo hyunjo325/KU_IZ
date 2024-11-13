@@ -1,5 +1,6 @@
 package client;
 
+import java.awt.*;
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
@@ -63,17 +64,25 @@ public class LobbyThread extends Thread{
                     userdata.setQuizTopic(parseLine[1]);
                 }
 
-
-
                 if (parseLine[0].equals("GAME_DENIED")){                    //아무도 없어서 게임을 시작하지 않음
                     //다른 참가자가 없어서 게임을 시작하지 않음을 알리는 글 추가?
                 }
                 if (parseLine[0].equals("GAME_STARTED")){                   //게임 시작
                     gameRunning = true;
-                    //GameThread 실행 및 join
 
                     //GameUI 실행
                     hostUI.startGame();
+                }
+                if (parseLine[0].equals("DRAW")){
+                    if (parseLine[1].equals("NULL")) {
+                        hostUI.getGameUI().receiveDrawingUpdates(null);
+                    } else if (parseLine[1].equals("CLEAR")) {
+                        hostUI.getGameUI().clearDrawingPanel();
+                    } else {
+                        Point p = new Point(Integer.parseInt(parseLine[1]), Integer.parseInt(parseLine[2]));
+                        LineInfo newLine = new LineInfo(p, Integer.parseInt(parseLine[3]));
+                        hostUI.getGameUI().receiveDrawingUpdates(newLine);
+                    }
                 }
                 if (parseLine[0].equals("GAME_RUNNING")){
                     System.out.println("게임이 이미 진행 중입니다.");
