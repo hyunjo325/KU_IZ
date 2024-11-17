@@ -23,6 +23,7 @@ public class ClientThread extends Thread {
     private UserPair userpair = null;
     private GameInfo game = null;
     private static Map<String, Integer> scores = new HashMap<>(); // 플레이어별 점수 저장
+     // 현재 출제자를 추적
 
     private final Vector<LineInfo> drawVector = new Vector<>();
 
@@ -39,6 +40,9 @@ public class ClientThread extends Thread {
             this.userpair = new UserPair(username, pw);
             System.out.println("System: " + username + " 접속.");
             synchronized (userVector){
+                if (userVector.isEmpty()) {
+                    game.setCurrentPresenter(username);  // 첫 번째 플레이어가 초기 출제자
+                }
                 userVector.add(userpair);
                 if (userVector.size() == 1){
                     isRoomOwner = true;
@@ -58,9 +62,13 @@ public class ClientThread extends Thread {
     private void sendGameWord() {
         String word = game.getRandomWord();
         // 방장(그림 그리는 사람)에게만 제시어 전송
-        if (isRoomOwner) {
-            sendself("SUBJECT_WORD#" + username + "#" + word);
+        if(userpair.getUsername().equals(game.getCurrentPresenter())){
+            userpair.getPw().println("SUBJECT_WORD#" + username + "#" + word);
+            userpair.getPw().flush();
         }
+//        if (isRoomOwner) {
+//            sendself("SUBJECT_WORD#" + username + "#" + word);
+//        }
     }
 
     public void run(){
@@ -96,6 +104,7 @@ public class ClientThread extends Thread {
                         game.setRunning(true);
                         System.out.println("System: " + msg);
                         sendall("GAME_STARTED");
+                        game.setCurrentPresenter(username);
                         sendall(msg);
                         sendGameWord(); // 게임 시작 시 제시어 전송
                     }
@@ -116,9 +125,9 @@ public class ClientThread extends Thread {
                         sendall(line);
                     }
                 }
-                if (parseLine[0].equals("TURN_START")) {
-                    sendGameWord(); // 다음 라운드 시작 시 새로운 제시어 전송
-                }
+//                if (parseLine[0].equals("TURN_START")) {
+//                    sendGameWord(); // 다음 라운드 시작 시 새로운 제시어 전송
+//                }
                 // 정답 체크 로직
                 if (parseLine[0].equals("ANSWER")) {
                     String username = parseLine[1];
@@ -129,20 +138,29 @@ public class ClientThread extends Thread {
 
                     if (isCorrect) {
                         // 정답 맞춤 처리
-                        String correctMessage = "CORRECT_ANSWER#" + username+"#10";
+                        String correctMessage = "CORRECT_ANSWER#" + username + "#10";
                         System.out.println("Correct answer by: " + username);
                         sendall(correctMessage);
 
                         // 점수 올리기
                         scores.putIfAbsent(username, 0);
-                        scores.put(username, scores.get(username)+10);
+                        scores.put(username, scores.get(username) + 10);
 
                         // 권한 바꾸기
-
+                        game.setCurrentPresenter(username);  // 현재 출제자 업데이트
+                        sendall("TURN_START#" + username);  // 모든 클라이언트에게 출제자 변경을 알림
 
                         // 다음 라운드 준비
                         Thread.sleep(2000); // 2초 딜레이
-                        sendGameWord(); // 새로운 제시어 전송
+
+                        // 새로운 제시어 전송
+                        String word = game.getRandomWord();
+                        for (UserPair user : userVector) {
+                            if (user.getUsername().equals(game.getCurrentPresenter())) {
+                                user.getPw().println("SUBJECT_WORD#" + user.getUsername() +"#" +word);
+                                user.getPw().flush();
+                            }
+                        }
                     }
                 }
 

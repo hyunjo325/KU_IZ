@@ -30,6 +30,9 @@ public class GameUI extends JPanel {
     private int selectedColor = 10;
     private UserData userdata;
     private boolean isWaitingForAnswer = false; // 정답 대기 상태 추적
+    private JButton colorBtn;
+    private JButton submitBtn;
+    private JButton clearBtn;
 
 
     public GameUI(String quizTopic, List<String> players, boolean isPresenter, Socket sock, PrintWriter pw, BufferedReader br, UserData userdata) {
@@ -90,7 +93,7 @@ public class GameUI extends JPanel {
         answerInput.setForeground(Color.BLACK);
 
         // 색상 선택 버튼 생성
-        JButton colorBtn = new JButton("색상 선택");
+        colorBtn = new JButton("색상 선택");
         colorBtn.setForeground(Color.WHITE);
         colorBtn.setPreferredSize(new Dimension(100, 40));
         colorBtn.setBackground(new Color(0x3B5998));
@@ -121,7 +124,7 @@ public class GameUI extends JPanel {
 
 
 
-        JButton submitBtn = new JButton("OK");
+        submitBtn = new JButton("OK");
         submitBtn.setPreferredSize(new Dimension(80, 40));
         submitBtn.setBackground(new Color(0x3B5998));
         submitBtn.setForeground(Color.BLACK);
@@ -143,7 +146,7 @@ public class GameUI extends JPanel {
 
 
         // 지우기 버튼 생성
-        JButton clearBtn = new JButton("지우기");
+        clearBtn = new JButton("지우기");
         clearBtn.setForeground(Color.WHITE);
         clearBtn.setPreferredSize(new Dimension(80, 40));
         clearBtn.setBackground(new Color(0x3B5998));
@@ -285,7 +288,37 @@ public class GameUI extends JPanel {
         }
     }
 
-    public void handlePresenterChange(String username){
+    public void handlePresenterChange(String username) {
+        // 현재 사용자가 새로운 출제자인지 확인
+        isPresenter = userdata.getUsername().equals(username);
 
+        // DrawingPanel의 출제자 상태 업데이트
+        drawingPanel.setPresenter(isPresenter);
+
+        // UI 업데이트
+        if (isPresenter) {
+            // 출제자가 된 경우
+            answerInput.setEnabled(false);
+            submitBtn.setEnabled(false);
+            answerInput.setText("당신은 출제자입니다");
+            wordLabel.setText(""); // 새 제시어를 기다림
+
+            // 그리기 관련 버튼들 활성화
+            colorBtn.setEnabled(true);
+            clearBtn.setEnabled(true);
+        } else {
+            // 참가자가 된 경우
+            answerInput.setEnabled(true);
+            submitBtn.setEnabled(true);
+            answerInput.setText("");
+            wordLabel.setText("");
+
+            // 그리기 관련 버튼들 비활성화
+            colorBtn.setEnabled(false);
+            clearBtn.setEnabled(false);
+        }
+
+        // 그리기 패널 초기화
+        clearDrawingPanel();
     }
 }

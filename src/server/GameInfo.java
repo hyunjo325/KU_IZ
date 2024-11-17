@@ -10,6 +10,7 @@ public class GameInfo {
     private String currentWord;
     private Random random = new Random();
     private Set<String> usedWords; // 이미 사용된 단어
+    private String currentPresenter;
 
     public GameInfo(){
         this.subject = "";
@@ -78,5 +79,13 @@ public class GameInfo {
 
     public void setRunning(boolean running) {
         this.running = running;
+    }
+
+    public String getCurrentPresenter() {
+        return currentPresenter;
+    }
+
+    public void setCurrentPresenter(String currentPresenter) {
+        this.currentPresenter = currentPresenter;
     }
 }
