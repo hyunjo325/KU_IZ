@@ -6,16 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="feat: 이주혁님 작성 코드 복붙">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/GameThread.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/GameUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/client/GameUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/LobbyThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/client/LobbyThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/UserData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/client/UserData.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/ClientThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/ClientThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/GameThread.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/GameUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/HostUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/HostUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/LobbyThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/LobbyThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/GameInfo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +33,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="je" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,28 +49,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.server.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;hj&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/hyunj/OneDrive/바탕 화면/4학년 2학기/네트워크프로그래밍/팀플/CatchMindClient&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.server.Main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "jungeun",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/hyunj/OneDrive/바탕 화면/4학년 2학기/네트워크프로그래밍/팀플/CatchMindClient",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "모듈",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "File.Encoding",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\hyunj\OneDrive\바탕 화면\4학년 2학기\네트워크프로그래밍\팀플\CatchMindClient\src\server" />
@@ -82,7 +80,7 @@
       <recent name="server" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.server.Main">
     <configuration name="Main" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="CatchMindClient" />
@@ -161,7 +159,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731377487432</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: 게임 시작 구현중">
+      <option name="closed" value="true" />
+      <created>1731818016525</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731818016525</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +187,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="변경" />
     <MESSAGE value="feat: 이주혁님 작성 코드 복붙" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 이주혁님 작성 코드 복붙" />
+    <MESSAGE value="feat: 게임 시작 구현중" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 게임 시작 구현중" />
   </component>
 </project>

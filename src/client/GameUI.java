@@ -21,6 +21,7 @@ public class GameUI extends JPanel {
     private JLabel timerLabel;
     private JLabel scoreLabel;
     private JLabel roundLabel;
+    private JLabel wordLabel;  // 제시어
     private JTextField answerInput;
     private DrawingPanel drawingPanel;  // 그림 영역
     private Map<String, Integer> scoreMap;
@@ -50,6 +51,15 @@ public class GameUI extends JPanel {
         JPanel roundPanel = new JPanel();
         roundPanel.add(roundLabel);
 
+        // 제시어 라벨 추가
+        wordLabel = new JLabel("", SwingConstants.CENTER);
+        wordLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        if (!isPresenter) {
+            wordLabel.setText("");
+        }
+        JPanel wordPanel = new JPanel();
+        wordPanel.add(wordLabel);
+
         timerLabel = new JLabel("남은 시간 : "+ timeLeft + "초");
         scoreLabel = new JLabel("점수: 0점");
         JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -57,6 +67,7 @@ public class GameUI extends JPanel {
         infoPanel.add(scoreLabel);
 
         topPanel.add(roundPanel);
+        topPanel.add(wordPanel);
         topPanel.add(infoPanel);
 
         add(topPanel, BorderLayout.NORTH);
@@ -196,6 +207,12 @@ public class GameUI extends JPanel {
         topLabel.setForeground(Color.WHITE);
         topLabel.setFont(new Font("Arial", Font.BOLD, 18));
         topLabel.setPreferredSize(new Dimension(600, 40));
+    }
+
+    public void updateWord(String word) {
+        if (isPresenter) {
+            wordLabel.setText("제시어: " + word);
+        }
     }
 
 }

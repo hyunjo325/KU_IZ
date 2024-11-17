@@ -88,6 +88,11 @@ public class LobbyThread extends Thread{
                     System.out.println("게임이 이미 진행 중입니다.");
                     break;
                 }
+                if (parseLine[0].equals("SUBJECT_WORD")) {
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().updateWord(parseLine[2]);
+                    }
+                }
 
             }
         }

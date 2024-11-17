@@ -52,6 +52,14 @@ public class ClientThread extends Thread {
 
     }
 
+    private void sendGameWord() {
+        String word = game.getRandomWord();
+        // 방장(그림 그리는 사람)에게만 제시어 전송
+        if (isRoomOwner) {
+            sendself("SUBJECT_WORD#" + username + "#" + word);
+        }
+    }
+
     public void run(){
         try{
             String line = null;
@@ -86,6 +94,7 @@ public class ClientThread extends Thread {
                         System.out.println("System: " + msg);
                         sendall("GAME_STARTED");
                         sendall(msg);
+                        sendGameWord(); // 게임 시작 시 제시어 전송
                     }
                 }
                 if (parseLine[0].equals("DRAW")){
@@ -103,6 +112,9 @@ public class ClientThread extends Thread {
                         }
                         sendall(line);
                     }
+                }
+                if (parseLine[0].equals("TURN_START")) {
+                    sendGameWord(); // 다음 라운드 시작 시 새로운 제시어 전송
                 }
 
             }
