@@ -11,12 +11,17 @@ public class GameInfo {
     private Random random = new Random();
     private Set<String> usedWords; // 이미 사용된 단어
     private String currentPresenter;
+    private int timeLeft = 120; // 2분
+    private Timer gameTimer;
+    private Vector<UserPair> userVector;
 
-    public GameInfo(){
+    public GameInfo(Vector<UserPair> userVector){
         this.subject = "";
         this.running = false;
         this.usedWords = new HashSet<>();
+        this.userVector = userVector;
         initializeWords();
+        setupTimer();
     }
 
     private void initializeWords() {
@@ -59,6 +64,38 @@ public class GameInfo {
         currentWord = availableWords.get(random.nextInt(availableWords.size()));
         usedWords.add(currentWord);
         return currentWord;
+    }
+
+    public void setupTimer() {
+        if (gameTimer != null) {
+            gameTimer.cancel();
+            gameTimer.purge();
+        }
+
+        gameTimer = new Timer();
+        timeLeft = 120; // 타이머 리셋
+
+        gameTimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (running && timeLeft >= 0) {
+                    // 모든 클라이언트에게 현재 시간 전송
+                    synchronized(userVector) {
+                        for (UserPair user : userVector) {
+                            user.getPw().println("TIME#" + timeLeft);
+                            user.getPw().flush();
+                        }
+                    }
+
+                    if (timeLeft == 0) {
+                        // 라운드 종료 처리
+                        timeLeft = 120; // 다음 라운드를 위해 리셋
+                        // 필요한 다른 라운드 종료 로직...
+                    }
+                    timeLeft--;
+                }
+            }
+        }, 0, 1000); // 1초마다 실행
     }
 
     public String getCurrentWord() {

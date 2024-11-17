@@ -23,7 +23,6 @@ public class ClientThread extends Thread {
     private UserPair userpair = null;
     private GameInfo game = null;
     private static Map<String, Integer> scores = new HashMap<>(); // 플레이어별 점수 저장
-     // 현재 출제자를 추적
 
     private final Vector<LineInfo> drawVector = new Vector<>();
 
@@ -66,9 +65,6 @@ public class ClientThread extends Thread {
             userpair.getPw().println("SUBJECT_WORD#" + username + "#" + word);
             userpair.getPw().flush();
         }
-//        if (isRoomOwner) {
-//            sendself("SUBJECT_WORD#" + username + "#" + word);
-//        }
     }
 
     public void run(){
@@ -98,6 +94,7 @@ public class ClientThread extends Thread {
                         System.out.println("System: " + msg);
                         sendself(msg);
                         sendself("GAME_DENIED");
+
                     }
                     else if (userVector.size() > 1) {
                         String msg = "게임을 시작합니다.";
@@ -105,6 +102,7 @@ public class ClientThread extends Thread {
                         System.out.println("System: " + msg);
                         sendall("GAME_STARTED");
                         game.setCurrentPresenter(username);
+                        game.setupTimer(); // 타이머 동기화 시작
                         sendall(msg);
                         sendGameWord(); // 게임 시작 시 제시어 전송
                     }
@@ -125,9 +123,6 @@ public class ClientThread extends Thread {
                         sendall(line);
                     }
                 }
-//                if (parseLine[0].equals("TURN_START")) {
-//                    sendGameWord(); // 다음 라운드 시작 시 새로운 제시어 전송
-//                }
                 // 정답 체크 로직
                 if (parseLine[0].equals("ANSWER")) {
                     String username = parseLine[1];
@@ -151,6 +146,7 @@ public class ClientThread extends Thread {
                         sendall("TURN_START#" + username);  // 모든 클라이언트에게 출제자 변경을 알림
 
                         // 다음 라운드 준비
+                        game.setupTimer(); // 타이머 리셋
                         Thread.sleep(2000); // 2초 딜레이
 
                         // 새로운 제시어 전송

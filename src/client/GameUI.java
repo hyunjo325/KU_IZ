@@ -219,6 +219,13 @@ public class GameUI extends JPanel {
         });
     }
 
+    public void updateTimer(int newTimeLeft) {
+        SwingUtilities.invokeLater(() -> {
+            timeLeft = newTimeLeft;
+            timerLabel.setText("남은 시간 : " + timeLeft + "초");
+        });
+    }
+
     public void startGame() {
         currentRound = 1;
         startRound();
@@ -237,17 +244,20 @@ public class GameUI extends JPanel {
         timeLeft = 120;
         timerLabel.setText("남은 시간 : " + timeLeft + "초");
 
-        // 타이머 설정
-        roundTimer = new Timer(1000, e -> {
-            timeLeft--;
+    }
+
+    // 서버로부터 시간 동기화 메시지를 받았을 때 호출될 메소드
+    public void syncTime(int serverTime) {
+        SwingUtilities.invokeLater(() -> {
+            timeLeft = serverTime;
             timerLabel.setText("남은 시간 : " + timeLeft + "초");
+
+            // 시간이 0이 되면 라운드 종료
             if (timeLeft <= 0) {
-                roundTimer.stop();
                 currentRound++;
                 startRound();
             }
         });
-        roundTimer.start();
     }
 
     public void receiveDrawingUpdates(LineInfo newLine) {

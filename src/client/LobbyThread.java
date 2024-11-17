@@ -1,5 +1,7 @@
 package client;
 
+import server.GameInfo;
+
 import java.awt.*;
 import java.net.*;
 import java.io.*;
@@ -14,6 +16,7 @@ public class LobbyThread extends Thread{
     //private BufferedReader scanner = new BufferedReader(new InputStreamReader(System.in));
     private boolean gameRunning = false;
     private HostUI hostUI;
+    private GameInfo gameInfo;
 
     public LobbyThread(Socket sock, PrintWriter pw, BufferedReader br, UserData userdata){
         this.sock = sock;
@@ -100,7 +103,11 @@ public class LobbyThread extends Thread{
                         hostUI.getGameUI().handleAnswerResult(username, true);
                         hostUI.getGameUI().updateScores(username, score);
                         hostUI.getGameUI().handlePresenterChange(username);
-
+                    }
+                }
+                if (parseLine[0].equals("TIME")) {
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().syncTime(Integer.parseInt(parseLine[1]));
                     }
                 }
 

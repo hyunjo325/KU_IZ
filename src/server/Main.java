@@ -8,8 +8,8 @@ import java.util.Vector;
 
 public class Main {
     public static void main(String[] args) {
-        GameInfo game = new GameInfo();
         Vector<UserPair> userVector = new Vector();
+        GameInfo game = new GameInfo(userVector);
         int usernum = 1;
 
         try{
