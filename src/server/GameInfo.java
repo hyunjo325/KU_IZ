@@ -1,6 +1,7 @@
 package server;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class GameInfo {
     private String subject;
@@ -8,10 +9,12 @@ public class GameInfo {
     private Map<String, List<String>> wordsBySubject;
     private String currentWord;
     private Random random = new Random();
+    private Set<String> usedWords; // 이미 사용된 단어
 
     public GameInfo(){
         this.subject = "";
         this.running = false;
+        this.usedWords = new HashSet<>();
         initializeWords();
     }
 
@@ -40,8 +43,20 @@ public class GameInfo {
         if (words == null || words.isEmpty()) {
             return "ERROR: No words available";
         }
-        currentWord = words.get(random.nextInt(words.size()));
-        System.out.println(currentWord);
+
+        // 아직 사용되지 않은 단어들만 선택
+        List<String> availableWords = words.stream()
+                .filter(word -> !usedWords.contains(word))
+                .collect(Collectors.toList());
+
+        if (availableWords.isEmpty()) {
+            // 모든 단어를 사용했다면 초기화
+            usedWords.clear();
+            availableWords = new ArrayList<>(words);
+        }
+
+        currentWord = availableWords.get(random.nextInt(availableWords.size()));
+        usedWords.add(currentWord);
         return currentWord;
     }
 

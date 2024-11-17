@@ -28,8 +28,11 @@ public class GameUI extends JPanel {
     private List<String> players;
     private Timer roundTimer;
     private int selectedColor = 10;
+    private UserData userdata;
+    private boolean isWaitingForAnswer = false; // 정답 대기 상태 추적
 
-    public GameUI(String quizTopic, List<String> players, boolean isPresenter, Socket sock, PrintWriter pw, BufferedReader br) {
+
+    public GameUI(String quizTopic, List<String> players, boolean isPresenter, Socket sock, PrintWriter pw, BufferedReader br, UserData userdata) {
         this.quizTopic = quizTopic;
         this.players = players;
         this.isPresenter = isPresenter; // 출제자 여부 설정
@@ -37,6 +40,7 @@ public class GameUI extends JPanel {
         this.sock = sock;
         this.pw = pw;
         this.br = br;
+        this.userdata = userdata;
         setLayout(new BorderLayout());
 
         initGameUI();
@@ -116,17 +120,23 @@ public class GameUI extends JPanel {
         JButton submitBtn = new JButton("OK");
         submitBtn.setPreferredSize(new Dimension(80, 40));
         submitBtn.setBackground(new Color(0x3B5998));
-        submitBtn.setForeground(Color.WHITE);
+        submitBtn.setForeground(Color.BLACK);
         submitBtn.setFocusPainted(false);
 
+        // 제시어를 맞추는 사람만 정답 제출 가능
+        if (isPresenter) {
+            answerInput.setEnabled(false);
+            submitBtn.setEnabled(false);
+            answerInput.setText("당신은 출제자입니다");
+        }
+
         submitBtn.addActionListener(e -> {
-            // 정답 제출 로직
-            if (checkAnswer()) {
-                roundTimer.stop();
+            if (!isPresenter && checkAnswer()) {
                 currentRound++;
                 startRound();
             }
         });
+
 
         // 지우기 버튼 생성
         JButton clearBtn = new JButton("지우기");
@@ -151,9 +161,55 @@ public class GameUI extends JPanel {
     }
 
     private boolean checkAnswer() {
-        // 정답 확인 로직 -> 맞췄다고 가정
+        // 입력값이 비어있는지 확인
+        if (answerInput.getText().trim().isEmpty()) {
+            return false;
+        }
+
+        // 이미 정답 대기 중이면 추가 제출 방지
+        if (isWaitingForAnswer) {
+            return false;
+        }
+
         String answer = answerInput.getText().trim();
-        return answer.equalsIgnoreCase("정답");
+        isWaitingForAnswer = true;
+
+        // 서버에 정답 확인 요청 전송
+        synchronized (pw) {
+            pw.println("ANSWER#" + userdata.getUsername() + "#" + answer);
+            pw.flush();
+        }
+
+        // 입력창 초기화 및 비활성화
+        answerInput.setText("");
+        answerInput.setEnabled(false);
+
+        // 5초 후 재입력 가능하도록 설정
+        Timer enableTimer = new Timer(5000, e -> {
+            isWaitingForAnswer = false;
+            answerInput.setEnabled(true);
+        });
+        enableTimer.setRepeats(false);
+        enableTimer.start();
+
+        return false; // 서버의 응답을 기다리므로 항상 false 반환
+    }
+
+    // 서버로부터 정답 결과를 받았을 때 호출될 메서드
+    public void handleAnswerResult(String username, boolean isCorrect) {
+        SwingUtilities.invokeLater(() -> {
+            isWaitingForAnswer = false;
+            answerInput.setEnabled(true);
+
+            if (isCorrect) {
+                JOptionPane.showMessageDialog(this,
+                        username + "님이 정답을 맞추셨습니다!",
+                        "정답 알림",
+                        JOptionPane.INFORMATION_MESSAGE);
+                currentRound++;
+                startRound();
+            }
+        });
     }
 
     public void startGame() {

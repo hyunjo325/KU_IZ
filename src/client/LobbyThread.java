@@ -93,6 +93,12 @@ public class LobbyThread extends Thread{
                         hostUI.getGameUI().updateWord(parseLine[2]);
                     }
                 }
+                if (parseLine[0].equals("CORRECT_ANSWER")) {
+                    String username = parseLine[1];
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().handleAnswerResult(username, true);
+                    }
+                }
 
             }
         }

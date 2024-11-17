@@ -116,6 +116,25 @@ public class ClientThread extends Thread {
                 if (parseLine[0].equals("TURN_START")) {
                     sendGameWord(); // 다음 라운드 시작 시 새로운 제시어 전송
                 }
+                // 정답 체크 로직
+                if (parseLine[0].equals("ANSWER")) {
+                    String username = parseLine[1];
+                    String answer = parseLine[2].trim();
+                    String currentWord = game.getCurrentWord();
+
+                    boolean isCorrect = answer.equals(currentWord);
+
+                    if (isCorrect) {
+                        // 정답 맞춤 처리
+                        String correctMessage = "CORRECT_ANSWER#" + username+"#10";
+                        System.out.println("Correct answer by: " + username);
+                        sendall(correctMessage);
+
+                        // 다음 라운드 준비
+                        Thread.sleep(2000); // 2초 딜레이
+                        sendGameWord(); // 새로운 제시어 전송
+                    }
+                }
 
             }
         }

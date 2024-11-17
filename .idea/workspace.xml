@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="feat: 이주혁님 작성 코드 복붙">
+    <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="feat: 방장에게 제시어 뜨도록 구현">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/GameUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/client/GameUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/LobbyThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/client/LobbyThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/ClientThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/ClientThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/GameUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/HostUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/HostUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/LobbyThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/LobbyThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/GameInfo.java" afterDir="false" />
@@ -80,7 +78,7 @@
       <recent name="server" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.server.Main">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="CatchMindClient" />
@@ -167,7 +165,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731818016525</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: 방장에게 제시어 뜨도록 구현">
+      <option name="closed" value="true" />
+      <created>1731819100820</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1731819100820</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,6 +194,7 @@
     <MESSAGE value="변경" />
     <MESSAGE value="feat: 이주혁님 작성 코드 복붙" />
     <MESSAGE value="feat: 게임 시작 구현중" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 게임 시작 구현중" />
+    <MESSAGE value="feat: 방장에게 제시어 뜨도록 구현" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 방장에게 제시어 뜨도록 구현" />
   </component>
 </project>
