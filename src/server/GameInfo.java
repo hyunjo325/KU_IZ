@@ -14,6 +14,7 @@ public class GameInfo {
     private int timeLeft = 120; // 2분
     private Timer gameTimer;
     private Vector<UserPair> userVector;
+    private int currentRound = 1;
 
     public GameInfo(Vector<UserPair> userVector){
         this.subject = "";

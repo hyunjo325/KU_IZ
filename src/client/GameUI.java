@@ -214,7 +214,16 @@ public class GameUI extends JPanel {
                         "정답 알림",
                         JOptionPane.INFORMATION_MESSAGE);
                 currentRound++;
-                startRound();
+                // 10라운드 체크
+                if (currentRound > 10) {
+                    // 서버에 게임 종료 요청
+                    synchronized (pw) {
+                        pw.println("GAME_END");
+                        pw.flush();
+                    }
+                } else {
+                    startRound();
+                }
             }
         });
     }
@@ -225,11 +234,6 @@ public class GameUI extends JPanel {
     }
 
     private void startRound() {
-        if (currentRound > 10) {
-            showFinalScores();
-            return;
-        }
-
         // 라운드 표시 업데이트
         roundLabel.setText("ROUND " + currentRound);
 
@@ -335,10 +339,65 @@ public class GameUI extends JPanel {
 
             // 그리기 패널 초기화
             clearDrawingPanel();
-
             // 새로운 출제자 설정
             handlePresenterChange(newPresenter);
-            startRound();
+            currentRound++;
+
+            // 10라운드 체크
+            if (currentRound > 10) {
+                // 서버에 게임 종료 요청
+                synchronized (pw) {
+                    pw.println("GAME_END");
+                    pw.flush();
+                }
+            } else {
+                startRound();
+            }
+        });
+    }
+    public void showFinalResults(Map<String, Integer> finalScores, List<String> winners) {
+        SwingUtilities.invokeLater(() -> {
+            // 게임 UI 클리어
+            removeAll();
+            setLayout(new BorderLayout());
+
+            // 결과 패널 생성
+            JPanel resultsPanel = new JPanel();
+            resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
+            resultsPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+            // 우승자 표시
+            JLabel winnerLabel = new JLabel("우승자: " + String.join(", ", winners), SwingConstants.CENTER);
+            winnerLabel.setFont(new Font("Arial", Font.BOLD, 24));
+            winnerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            resultsPanel.add(winnerLabel);
+            resultsPanel.add(Box.createVerticalStrut(20));
+
+            // 모든 플레이어 점수 표시
+            JPanel scoresPanel = new JPanel(new GridLayout(0, 1, 5, 5));
+            scoresPanel.setBorder(BorderFactory.createTitledBorder("최종 점수"));
+
+            // 점수 순으로 정렬
+            finalScores.entrySet().stream()
+                    .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                    .forEach(entry -> {
+                        JLabel scoreLabel = new JLabel(
+                                entry.getKey() + ": " + entry.getValue() + "점",
+                                SwingConstants.CENTER
+                        );
+                        scoreLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+                        if (winners.contains(entry.getKey())) {
+                            scoreLabel.setForeground(new Color(0x3B5998));
+                            scoreLabel.setFont(scoreLabel.getFont().deriveFont(Font.BOLD));
+                        }
+                        scoresPanel.add(scoreLabel);
+                    });
+
+            resultsPanel.add(scoresPanel);
+            add(resultsPanel, BorderLayout.CENTER);
+
+            revalidate();
+            repaint();
         });
     }
 }

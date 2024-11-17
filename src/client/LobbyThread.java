@@ -6,7 +6,9 @@ import java.awt.*;
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LobbyThread extends Thread{
     private Socket sock = null;
@@ -118,7 +120,37 @@ public class LobbyThread extends Thread{
                         hostUI.getGameUI().handleTimeUp(newPresenter);
                     }
                 }
+                if (parseLine[0].equals("GAME_END")) {
+                    // 게임 결과 파싱
+                    Map<String, Integer> finalScores = new HashMap<>();
+                    List<String> winners = new ArrayList<>();
 
+                    int i = 1;
+                    while (i < parseLine.length && !parseLine[i].equals("WIN")) {
+                        String username = parseLine[i];
+                        int score = Integer.parseInt(parseLine[i + 1]);
+                        finalScores.put(username, score);
+                        i += 2;
+                    }
+
+                    // 우승자 목록 파싱
+                    i++; // "WIN" 다음부터
+                    while (i < parseLine.length) {
+                        winners.add(parseLine[i]);
+                        i++;
+                    }
+
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().showFinalResults(finalScores, winners);
+                    }
+                }
+                if (parseLine[0].equals("SCORE_UP")) {
+                    String username = parseLine[1];
+                    String score = parseLine[2];
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().updateScores(username, score);
+                    }
+                }
             }
         }
         catch (Exception e) {System.out.println(e);}
