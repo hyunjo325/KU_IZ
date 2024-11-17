@@ -208,6 +208,59 @@ public class ClientThread extends Thread {
             synchronized (userVector){
                 System.out.println("System: " + username + " 나감.");
                 userVector.remove(userpair);
+
+                // 게임이 진행 중일 때 플레이어가 나가는 경우
+                if (game.isRunning()) {
+                    if (userVector.size() <= 1) {
+                        // 1명 이하가 되면 게임 종료
+                        game.setRunning(false);
+                        if (game.getGameTimer() != null) {
+                            game.getGameTimer().cancel();
+                        }
+
+                        // 남은 플레이어에게 게임 종료 메시지 전송
+                        StringBuilder resultMessage = new StringBuilder("GAME_END");
+                        // 점수 정보 추가
+                        synchronized (userVector) {
+                            for (UserPair user : userVector) {
+                                String playerName = user.getUsername();
+                                int score = scores.getOrDefault(playerName, 0);
+                                resultMessage.append("#").append(playerName).append("#").append(score);
+                            }
+                        }
+                        // 남은 플레이어를 승자로 지정
+                        if (!userVector.isEmpty()) {
+                            resultMessage.append("#WIN#").append(userVector.get(0).getUsername());
+                        }
+                        sendall(resultMessage.toString());
+                    }
+                    else if (username.equals(game.getCurrentPresenter())) {
+                        // 출제자가 나간 경우
+                        String newPresenter = game.selectRandomPresenter();
+                        game.setCurrentPresenter(newPresenter);
+                        String newWord = game.getRandomWord();
+
+                        // 1. 모든 클라이언트에게 출제자가 나갔다는 알림
+                        sendall("PRESENTER_DISCONNECTED#" + username);
+
+                        // 2. 모든 클라이언트에게 새로운 턴 시작 알림
+                        sendall("TURN_START#" + newPresenter);
+
+                        // 3. 새로운 출제자에게 제시어 전송 (마지막에 실행)
+                        synchronized(userVector) {
+                            for (UserPair user : userVector) {
+                                if (user.getUsername().equals(newPresenter)) {
+                                    user.getPw().println("SUBJECT_WORD#" + newPresenter + "#" + newWord);
+                                    user.getPw().flush();
+                                }
+                            }
+                        }
+
+                        // 4. 타이머 리셋
+                        game.setupTimer();
+                    }
+                }
+
                 if (isRoomOwner && !userVector.isEmpty()){
                     newRoomOwner();
                 }

@@ -115,6 +115,11 @@ public class GameInfo {
             }
         }, 0, 1000); // 1초마다 실행
     }
+    // Timer getter 추가
+    public Timer getGameTimer() {
+        return gameTimer;
+    }
+
 
     // 랜덤으로 다음 출제자 선택
     public String selectRandomPresenter() {

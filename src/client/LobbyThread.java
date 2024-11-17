@@ -151,6 +151,19 @@ public class LobbyThread extends Thread{
                         hostUI.getGameUI().updateScores(username, score);
                     }
                 }
+                if (parseLine[0].equals("PRESENTER_DISCONNECTED")) {
+                    String disconnectedUser = parseLine[1];
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().handlePresenterDisconnected(disconnectedUser);
+                    }
+                }
+                if (parseLine[0].equals("TURN_START")) {
+                    String newPresenter = parseLine[1];
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().handlePresenterChange(newPresenter);
+                        hostUI.getGameUI().clearDrawingPanel();
+                    }
+                }
             }
         }
         catch (Exception e) {System.out.println(e);}

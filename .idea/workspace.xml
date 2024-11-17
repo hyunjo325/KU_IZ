@@ -4,14 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="feat: 타임아웃되면 그림그리는 사람 바뀌도록 구현">
+    <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="feat: 점수 보여주기까지 구현">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/GameUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/client/GameUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/LobbyThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/client/LobbyThread.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/ClientThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/ClientThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/GameUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/LobbyThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/LobbyThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/GameInfo.java" afterDir="false" />
@@ -216,7 +213,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731864978477</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="feat: 점수 보여주기까지 구현">
+      <option name="closed" value="true" />
+      <created>1731867807309</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1731867807309</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,6 +248,7 @@
     <MESSAGE value="feat: 그리는 턴 주고받기 구현" />
     <MESSAGE value="feat: 서버랑 클라이언트 타이머 싱크맞추기" />
     <MESSAGE value="feat: 타임아웃되면 그림그리는 사람 바뀌도록 구현" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 타임아웃되면 그림그리는 사람 바뀌도록 구현" />
+    <MESSAGE value="feat: 점수 보여주기까지 구현" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 점수 보여주기까지 구현" />
   </component>
 </project>

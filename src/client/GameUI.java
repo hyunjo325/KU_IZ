@@ -279,12 +279,6 @@ public class GameUI extends JPanel {
         topLabel.setPreferredSize(new Dimension(600, 40));
     }
 
-    public void updateWord(String word) {
-        if (isPresenter) {
-            wordLabel.setText("제시어: " + word);
-        }
-    }
-
     public void updateScores(String username, String score){
         int newScore = scoreMap.get(username);
         newScore += Integer.parseInt(score);
@@ -308,7 +302,7 @@ public class GameUI extends JPanel {
             answerInput.setEnabled(false);
             submitBtn.setEnabled(false);
             answerInput.setText("당신은 출제자입니다");
-            wordLabel.setText(""); // 새 제시어를 기다림
+            // 제시어는 여기서 지우지 않음 - SUBJECT_WORD 메시지가 올 때까지 기다림
 
             // 그리기 관련 버튼들 활성화
             colorBtn.setEnabled(true);
@@ -318,15 +312,22 @@ public class GameUI extends JPanel {
             answerInput.setEnabled(true);
             submitBtn.setEnabled(true);
             answerInput.setText("");
-            wordLabel.setText("");
+            wordLabel.setText(""); // 참가자는 제시어를 볼 수 없음
 
             // 그리기 관련 버튼들 비활성화
             colorBtn.setEnabled(false);
             clearBtn.setEnabled(false);
         }
+    }
 
-        // 그리기 패널 초기화
-        clearDrawingPanel();
+    public void updateWord(String word) {
+        SwingUtilities.invokeLater(() -> {
+            if (isPresenter) {
+                wordLabel.setText("제시어: " + word);
+            } else {
+                wordLabel.setText(""); // 참가자는 제시어를 볼 수 없음
+            }
+        });
     }
 
     public void handleTimeUp(String newPresenter) {
@@ -398,6 +399,17 @@ public class GameUI extends JPanel {
 
             revalidate();
             repaint();
+        });
+    }
+    public void handlePresenterDisconnected(String disconnectedUser) {
+        SwingUtilities.invokeLater(() -> {
+            JOptionPane.showMessageDialog(this,
+                    disconnectedUser + "님의 연결이 끊어졌습니다.",
+                    "출제자 연결 종료",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            // 그리기 패널 초기화
+            clearDrawingPanel();
         });
     }
 }
