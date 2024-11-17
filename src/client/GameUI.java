@@ -219,13 +219,6 @@ public class GameUI extends JPanel {
         });
     }
 
-    public void updateTimer(int newTimeLeft) {
-        SwingUtilities.invokeLater(() -> {
-            timeLeft = newTimeLeft;
-            timerLabel.setText("남은 시간 : " + timeLeft + "초");
-        });
-    }
-
     public void startGame() {
         currentRound = 1;
         startRound();
@@ -330,5 +323,22 @@ public class GameUI extends JPanel {
 
         // 그리기 패널 초기화
         clearDrawingPanel();
+    }
+
+    public void handleTimeUp(String newPresenter) {
+        SwingUtilities.invokeLater(() -> {
+            // 시간 초과 메시지 표시
+            JOptionPane.showMessageDialog(this,
+                    "시간이 초과되었습니다!\n다음 출제자: " + newPresenter,
+                    "라운드 종료",
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            // 그리기 패널 초기화
+            clearDrawingPanel();
+
+            // 새로운 출제자 설정
+            handlePresenterChange(newPresenter);
+            startRound();
+        });
     }
 }

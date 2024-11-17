@@ -89,13 +89,45 @@ public class GameInfo {
 
                     if (timeLeft == 0) {
                         // 라운드 종료 처리
+                        String nextPresenter = selectRandomPresenter();
+                        setCurrentPresenter(nextPresenter);
+                        String newWord = getRandomWord();
+                        // 모든 클라이언트에게 라운드 종료와 새로운 출제자 알림
+                        synchronized(userVector) {
+                            for (UserPair user : userVector) {
+                                user.getPw().println("TIME_UP#" + currentPresenter);
+                                user.getPw().flush();
+                            }
+                        }
+                        synchronized(userVector) {
+                            for (UserPair user : userVector) {
+                                if (user.getUsername().equals(currentPresenter)) {
+                                    user.getPw().println("SUBJECT_WORD#" + currentPresenter + "#" + newWord);
+                                    user.getPw().flush();
+                                }
+                            }
+                        }
                         timeLeft = 120; // 다음 라운드를 위해 리셋
-                        // 필요한 다른 라운드 종료 로직...
                     }
                     timeLeft--;
                 }
             }
         }, 0, 1000); // 1초마다 실행
+    }
+
+    // 랜덤으로 다음 출제자 선택
+    public String selectRandomPresenter() {
+        if (userVector == null || userVector.isEmpty()) {
+            return null;
+        }
+
+        // 현재 출제자를 제외한 다른 사용자 중에서 선택
+        List<String> availablePresenters = userVector.stream()
+                .map(UserPair::getUsername)
+                .filter(username -> !username.equals(currentPresenter))
+                .collect(Collectors.toList());
+
+        return availablePresenters.get(random.nextInt(availablePresenters.size()));
     }
 
     public String getCurrentWord() {

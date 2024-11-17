@@ -110,6 +110,14 @@ public class LobbyThread extends Thread{
                         hostUI.getGameUI().syncTime(Integer.parseInt(parseLine[1]));
                     }
                 }
+                if (parseLine[0].equals("TIME_UP")) {
+                    String newPresenter = parseLine[1];
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        // 시간 초과 메시지를 표시하고 새로운 출제자로 변경
+                        hostUI.getGameUI().handlePresenterChange(newPresenter);
+                        hostUI.getGameUI().handleTimeUp(newPresenter);
+                    }
+                }
 
             }
         }
