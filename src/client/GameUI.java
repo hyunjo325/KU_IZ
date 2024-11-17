@@ -41,6 +41,10 @@ public class GameUI extends JPanel {
         this.pw = pw;
         this.br = br;
         this.userdata = userdata;
+        this.scoreMap = new HashMap<>();
+        for(String player : players){
+            scoreMap.put(player,0);
+        }
         setLayout(new BorderLayout());
 
         initGameUI();
@@ -184,8 +188,8 @@ public class GameUI extends JPanel {
         answerInput.setText("");
         answerInput.setEnabled(false);
 
-        // 5초 후 재입력 가능하도록 설정
-        Timer enableTimer = new Timer(5000, e -> {
+        // 2초 후 재입력 가능하도록 설정
+        Timer enableTimer = new Timer(2000, e -> {
             isWaitingForAnswer = false;
             answerInput.setEnabled(true);
         });
@@ -271,4 +275,17 @@ public class GameUI extends JPanel {
         }
     }
 
+    public void updateScores(String username, String score){
+        int newScore = scoreMap.get(username);
+        newScore += Integer.parseInt(score);
+        scoreMap.put(username, newScore);
+        // scoreLabel 업데이트 (자신의 점수만 표시)
+        if (username.equals(userdata.getUsername())) {
+            scoreLabel.setText("점수: " + newScore + "점");
+        }
+    }
+
+    public void handlePresenterChange(String username){
+
+    }
 }

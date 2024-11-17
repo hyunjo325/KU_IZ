@@ -95,8 +95,12 @@ public class LobbyThread extends Thread{
                 }
                 if (parseLine[0].equals("CORRECT_ANSWER")) {
                     String username = parseLine[1];
+                    String score = parseLine[2];
                     if (hostUI != null && hostUI.getGameUI() != null) {
                         hostUI.getGameUI().handleAnswerResult(username, true);
+                        hostUI.getGameUI().updateScores(username, score);
+                        hostUI.getGameUI().handlePresenterChange(username);
+
                     }
                 }
 

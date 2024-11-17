@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 public class ClientThread extends Thread {
@@ -20,6 +22,7 @@ public class ClientThread extends Thread {
     private boolean isRoomOwner = false;
     private UserPair userpair = null;
     private GameInfo game = null;
+    private static Map<String, Integer> scores = new HashMap<>(); // 플레이어별 점수 저장
 
     private final Vector<LineInfo> drawVector = new Vector<>();
 
@@ -129,6 +132,13 @@ public class ClientThread extends Thread {
                         String correctMessage = "CORRECT_ANSWER#" + username+"#10";
                         System.out.println("Correct answer by: " + username);
                         sendall(correctMessage);
+
+                        // 점수 올리기
+                        scores.putIfAbsent(username, 0);
+                        scores.put(username, scores.get(username)+10);
+
+                        // 권한 바꾸기
+
 
                         // 다음 라운드 준비
                         Thread.sleep(2000); // 2초 딜레이
