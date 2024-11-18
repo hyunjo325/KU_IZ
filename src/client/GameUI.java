@@ -214,6 +214,7 @@ public class GameUI extends JPanel {
                         "정답 알림",
                         JOptionPane.INFORMATION_MESSAGE);
                 currentRound++;
+                clearDrawingPanel();
                 // 10라운드 체크
                 if (currentRound > 10) {
                     // 서버에 게임 종료 요청
