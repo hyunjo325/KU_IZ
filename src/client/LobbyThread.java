@@ -1,10 +1,14 @@
 package client;
 
+import server.GameInfo;
+
 import java.awt.*;
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LobbyThread extends Thread{
     private Socket sock = null;
@@ -14,6 +18,7 @@ public class LobbyThread extends Thread{
     //private BufferedReader scanner = new BufferedReader(new InputStreamReader(System.in));
     private boolean gameRunning = false;
     private HostUI hostUI;
+    private GameInfo gameInfo;
 
     public LobbyThread(Socket sock, PrintWriter pw, BufferedReader br, UserData userdata){
         this.sock = sock;
@@ -88,7 +93,77 @@ public class LobbyThread extends Thread{
                     System.out.println("게임이 이미 진행 중입니다.");
                     break;
                 }
+                if (parseLine[0].equals("SUBJECT_WORD")) {
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().updateWord(parseLine[2]);
+                    }
+                }
+                if (parseLine[0].equals("CORRECT_ANSWER")) {
+                    String username = parseLine[1];
+                    String score = parseLine[2];
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().handleAnswerResult(username, true);
+                        hostUI.getGameUI().updateScores(username, score);
+                        hostUI.getGameUI().handlePresenterChange(username);
+                    }
+                }
+                if (parseLine[0].equals("TIME")) {
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().syncTime(Integer.parseInt(parseLine[1]));
+                    }
+                }
+                if (parseLine[0].equals("TIME_UP")) {
+                    String newPresenter = parseLine[1];
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        // 시간 초과 메시지를 표시하고 새로운 출제자로 변경
+                        hostUI.getGameUI().handlePresenterChange(newPresenter);
+                        hostUI.getGameUI().handleTimeUp(newPresenter);
+                    }
+                }
+                if (parseLine[0].equals("GAME_END")) {
+                    // 게임 결과 파싱
+                    Map<String, Integer> finalScores = new HashMap<>();
+                    List<String> winners = new ArrayList<>();
 
+                    int i = 1;
+                    while (i < parseLine.length && !parseLine[i].equals("WIN")) {
+                        String username = parseLine[i];
+                        int score = Integer.parseInt(parseLine[i + 1]);
+                        finalScores.put(username, score);
+                        i += 2;
+                    }
+
+                    // 우승자 목록 파싱
+                    i++; // "WIN" 다음부터
+                    while (i < parseLine.length) {
+                        winners.add(parseLine[i]);
+                        i++;
+                    }
+
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().showFinalResults(finalScores, winners);
+                    }
+                }
+                if (parseLine[0].equals("SCORE_UP")) {
+                    String username = parseLine[1];
+                    String score = parseLine[2];
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().updateScores(username, score);
+                    }
+                }
+                if (parseLine[0].equals("PRESENTER_DISCONNECTED")) {
+                    String disconnectedUser = parseLine[1];
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().handlePresenterDisconnected(disconnectedUser);
+                    }
+                }
+                if (parseLine[0].equals("TURN_START")) {
+                    String newPresenter = parseLine[1];
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().handlePresenterChange(newPresenter);
+                        hostUI.getGameUI().clearDrawingPanel();
+                    }
+                }
             }
         }
         catch (Exception e) {System.out.println(e);}

@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="feat: 이주혁님 작성 코드 복붙">
+    <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="feat: 그림 그리던 사람 연결 끊어지면 다른 사람으로 그리도록 구현">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/GameThread.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/LobbyThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/client/LobbyThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/UserData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/client/UserData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/ClientThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/ClientThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/GameThread.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/GameUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/HostUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/HostUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/LobbyThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/LobbyThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="je" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -57,7 +47,7 @@
     &quot;Application.server.Main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;hj&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;jungeun&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/hyunj/OneDrive/바탕 화면/4학년 2학기/네트워크프로그래밍/팀플/CatchMindClient&quot;,
@@ -161,7 +151,79 @@
       <option name="project" value="LOCAL" />
       <updated>1731377487432</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat: 게임 시작 구현중">
+      <option name="closed" value="true" />
+      <created>1731818016525</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1731818016525</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat: 방장에게 제시어 뜨도록 구현">
+      <option name="closed" value="true" />
+      <created>1731819100820</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1731819100820</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: 정답처리 구현">
+      <option name="closed" value="true" />
+      <created>1731823170692</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1731823170692</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: 맞추면 점수 업데이트">
+      <option name="closed" value="true" />
+      <created>1731858957989</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1731858957989</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: 그리는 턴 주고받기 구현">
+      <option name="closed" value="true" />
+      <created>1731860506186</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1731860506186</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: 서버랑 클라이언트 타이머 싱크맞추기">
+      <option name="closed" value="true" />
+      <created>1731863728568</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1731863728568</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: 타임아웃되면 그림그리는 사람 바뀌도록 구현">
+      <option name="closed" value="true" />
+      <created>1731864978477</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1731864978477</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feat: 점수 보여주기까지 구현">
+      <option name="closed" value="true" />
+      <created>1731867807309</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1731867807309</updated>
+    </task>
+    <task id="LOCAL-00011" summary="feat: 그림 그리던 사람 연결 끊어지면 다른 사람으로 그리도록 구현">
+      <option name="closed" value="true" />
+      <created>1731868799724</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1731868799724</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +243,15 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="변경" />
     <MESSAGE value="feat: 이주혁님 작성 코드 복붙" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 이주혁님 작성 코드 복붙" />
+    <MESSAGE value="feat: 게임 시작 구현중" />
+    <MESSAGE value="feat: 방장에게 제시어 뜨도록 구현" />
+    <MESSAGE value="feat: 정답처리 구현" />
+    <MESSAGE value="feat: 맞추면 점수 업데이트" />
+    <MESSAGE value="feat: 그리는 턴 주고받기 구현" />
+    <MESSAGE value="feat: 서버랑 클라이언트 타이머 싱크맞추기" />
+    <MESSAGE value="feat: 타임아웃되면 그림그리는 사람 바뀌도록 구현" />
+    <MESSAGE value="feat: 점수 보여주기까지 구현" />
+    <MESSAGE value="feat: 그림 그리던 사람 연결 끊어지면 다른 사람으로 그리도록 구현" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 그림 그리던 사람 연결 끊어지면 다른 사람으로 그리도록 구현" />
   </component>
 </project>

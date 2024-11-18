@@ -166,7 +166,7 @@ public class HostUI extends JFrame {
     }
 
     public void startGame() {
-        gameUI = new GameUI(userdata.getQuizTopic(), userdata.getPlayerList(),userdata.getIsRoomOwner(),sock, pw, br);
+        gameUI = new GameUI(userdata.getQuizTopic(), userdata.getPlayerList(),userdata.getIsRoomOwner(),sock, pw, br, userdata);
         mainPanel.add(gameUI, "GameUI");
         cardLayout.show(mainPanel, "GameUI");
         gameUI.startGame();
