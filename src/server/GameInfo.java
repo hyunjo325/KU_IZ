@@ -14,7 +14,9 @@ public class GameInfo {
     private int timeLeft = 120; // 2분
     private Timer gameTimer;
     private Vector<UserPair> userVector;
-    private int currentRound = 1;
+//    private int currentRound = 1;
+    private Map<String, Integer> gameScores = new HashMap<>();
+    private Set<String> initialPlayers = new HashSet<>(); // 접속했던 사용자들 모음
 
     public GameInfo(Vector<UserPair> userVector){
         this.subject = "";
@@ -43,6 +45,47 @@ public class GameInfo {
 
         wordsBySubject.put("건국대학교", konkukWords);
         wordsBySubject.put("컴퓨터 공학", computerWords);
+    }
+
+    // 게임 시작 시 호출되어 초기 플레이어 목록을 저장
+    public void initializeGameScores() {
+        synchronized(userVector) {
+            for (UserPair user : userVector) {
+                String username = user.getUsername();
+                gameScores.put(username, 0);
+                initialPlayers.add(username);
+            }
+        }
+    }
+
+    // 게임 종료 시 모든 플레이어의 점수를 포함한 결과 문자열 생성
+    public String generateGameEndMessage() {
+        StringBuilder resultMessage = new StringBuilder("GAME_END");
+
+        // 모든 초기 플레이어의 점수를 포함
+        int maxScore = -1;
+        for (String player : initialPlayers) {
+            int score = gameScores.getOrDefault(player, 0);
+            resultMessage.append("#").append(player).append("#").append(score);
+            maxScore = Math.max(maxScore, score);
+        }
+
+        // 승자 찾기 (최고 점수를 가진 모든 플레이어)
+        resultMessage.append("#WIN");
+        for (String player : initialPlayers) {
+            if (gameScores.getOrDefault(player, 0) == maxScore) {
+                resultMessage.append("#").append(player);
+            }
+        }
+
+        return resultMessage.toString();
+    }
+
+    // 점수 업데이트 메서드
+    public void updateScore(String username, int points) {
+        if (initialPlayers.contains(username)) {
+            gameScores.put(username, gameScores.getOrDefault(username, 0) + points);
+        }
     }
 
     public String getRandomWord() {

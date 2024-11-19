@@ -205,7 +205,14 @@ public class HostUI extends JFrame {
         pw.println("START_GAME");
         pw.flush();
     }
-
+    public void updateQuizTopic(String topic) {
+        if (!isHost) {  // 방장이 아닌 경우에만 업데이트
+            JLabel topLabel = (JLabel) ((JPanel)mainPanel.getComponent(0)).getComponent(0);
+            topLabel.setText("퀴즈 주제: " + topic);
+            topLabel.revalidate();
+            topLabel.repaint();
+        }
+    }
 
 /*    public static void main(String[] args) {
        new HostUI(true); // 방장

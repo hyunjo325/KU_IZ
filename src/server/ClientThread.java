@@ -49,6 +49,11 @@ public class ClientThread extends Thread {
                 }
                 alertRoomEnter(usernum);
                 alertPlayerUpdate();
+
+                // 이미 주제가 선택되어 있다면 새로 접속한 사용자에게 전송
+                if (game.getSubject() != null && !game.getSubject().isEmpty()) {
+                    sendself("SUBJECT#" + game.getSubject());
+                }
             }
             running = true;
 
@@ -98,6 +103,7 @@ public class ClientThread extends Thread {
                     else if (userVector.size() > 1) {
                         String msg = "게임을 시작합니다.";
                         game.setRunning(true);
+                        game.initializeGameScores(); // 게임 시작 시 초기 플레이어 목록과 점수 초기화
                         System.out.println("System: " + msg);
                         sendall("GAME_STARTED");
                         game.setCurrentPresenter(username);
@@ -137,13 +143,8 @@ public class ClientThread extends Thread {
                         // 새 제시어 준비
                         String word = game.getRandomWord();
 
-                        // 출제자 변경 전에 점수 업데이트
-                        scores.putIfAbsent(username, 0);  // 정답 맞춘 사람
-                        scores.putIfAbsent(previousPresenter, 0);  // 이전 출제자
-
-                        // 각각 10점씩 부여
-                        scores.put(username, scores.get(username) + 10);  // 정답 맞춘 사람 +10
-                        scores.put(previousPresenter, scores.get(previousPresenter) + 10);  // 그림 그린 사람 +10
+                        game.updateScore(username, 10);       // 정답자 점수
+                        game.updateScore(previousPresenter, 10); // 출제자 점수
 
                         // 점수 업데이트 메시지 전송
                         String presenterScoreMessage = "SCORE_UP#" + previousPresenter + "#10";  // 그림 그린 사람
@@ -168,36 +169,13 @@ public class ClientThread extends Thread {
 
                         // 타이머 리셋
                         game.setupTimer();
+                    }else{
+                        sendself("WRONG_ANSWER#"+ username); // 오답일 경우
                     }
                 }
                 if (parseLine[0].equals("GAME_END")){
-                    // 최종 점수를 담을 메시지 생성
-                    StringBuilder resultMessage = new StringBuilder("GAME_END");
-
-                    // 가장 높은 점수 찾기
-                    int maxScore = -1;
-                    synchronized (userVector) {
-                        for (UserPair user : userVector) {
-                            username = user.getUsername();
-                            int score = scores.getOrDefault(username, 0);
-                            resultMessage.append("#").append(username).append("#").append(score);
-                            maxScore = Math.max(maxScore, score);
-                        }
-                    }
-
-                    // 승자 찾기 (최고 점수를 가진 모든 플레이어)
-                    resultMessage.append("#WIN");
-                    synchronized (userVector) {
-                        for (UserPair user : userVector) {
-                            username = user.getUsername();
-                            if (scores.getOrDefault(username, 0) == maxScore) {
-                                resultMessage.append("#").append(username);
-                            }
-                        }
-                    }
-
-                    // 모든 클라이언트에게 결과 전송
-                    sendall(resultMessage.toString());
+                    String resultMessage = game.generateGameEndMessage();
+                    sendall(resultMessage);
                     game.setRunning(false);
                 }
 
@@ -213,26 +191,12 @@ public class ClientThread extends Thread {
                 if (game.isRunning()) {
                     if (userVector.size() <= 1) {
                         // 1명 이하가 되면 게임 종료
-                        game.setRunning(false);
                         if (game.getGameTimer() != null) {
                             game.getGameTimer().cancel();
                         }
-
-                        // 남은 플레이어에게 게임 종료 메시지 전송
-                        StringBuilder resultMessage = new StringBuilder("GAME_END");
-                        // 점수 정보 추가
-                        synchronized (userVector) {
-                            for (UserPair user : userVector) {
-                                String playerName = user.getUsername();
-                                int score = scores.getOrDefault(playerName, 0);
-                                resultMessage.append("#").append(playerName).append("#").append(score);
-                            }
-                        }
-                        // 남은 플레이어를 승자로 지정
-                        if (!userVector.isEmpty()) {
-                            resultMessage.append("#WIN#").append(userVector.get(0).getUsername());
-                        }
-                        sendall(resultMessage.toString());
+                        String resultMessage = game.generateGameEndMessage();
+                        sendall(resultMessage);
+                        game.setRunning(false);
                     }
                     else if (username.equals(game.getCurrentPresenter())) {
                         // 출제자가 나간 경우
