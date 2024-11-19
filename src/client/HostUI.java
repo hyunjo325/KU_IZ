@@ -139,18 +139,18 @@ public class HostUI extends JFrame {
         panel.add(playerListPanel, BorderLayout.CENTER);
 
         if (isHost) {
-        // 방장 화면
-        JButton startGameBtn = new JButton("게임 시작");
+            // 방장 화면
+            JButton startGameBtn = new JButton("게임 시작");
 
-        startGameBtn.setPreferredSize(new Dimension(100, 40));
-        startGameBtn.setBackground(new Color(0x3B5998));
-        startGameBtn.setForeground(Color.BLACK);
-        startGameBtn.setFocusPainted(false);
-        startGameBtn.addActionListener(e -> sendStart());
+            startGameBtn.setPreferredSize(new Dimension(100, 40));
+            startGameBtn.setBackground(new Color(0x3B5998));
+            startGameBtn.setForeground(Color.BLACK);
+            startGameBtn.setFocusPainted(false);
+            startGameBtn.addActionListener(e -> sendStart());
 
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.add(startGameBtn);
-        panel.add(bottomPanel, BorderLayout.SOUTH);
+            JPanel bottomPanel = new JPanel();
+            bottomPanel.add(startGameBtn);
+            panel.add(bottomPanel, BorderLayout.SOUTH);
         } else {
             // 참가자 화면
             JLabel waitingLabel = new JLabel("방장이 게임 시작하기를 기다리는 중", SwingConstants.CENTER);
@@ -205,10 +205,12 @@ public class HostUI extends JFrame {
         pw.println("START_GAME");
         pw.flush();
     }
-
-
-/*    public static void main(String[] args) {
-       new HostUI(true); // 방장
-       // new HostUI(false); // 참가자
-    }*/
+    public void updateQuizTopic(String topic) {
+        if (!isHost) {  // 방장이 아닌 경우에만 업데이트
+            JLabel topLabel = (JLabel) ((JPanel)mainPanel.getComponent(0)).getComponent(0);
+            topLabel.setText("퀴즈 주제: " + topic);
+            topLabel.revalidate();
+            topLabel.repaint();
+        }
+    }
 }

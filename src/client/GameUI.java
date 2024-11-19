@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,7 +30,6 @@ public class GameUI extends JPanel {
     private Timer roundTimer;
     private int selectedColor = 10;
     private UserData userdata;
-    private boolean isWaitingForAnswer = false; // 정답 대기 상태 추적
     private JButton colorBtn;
     private JButton submitBtn;
     private JButton clearBtn;
@@ -62,7 +62,6 @@ public class GameUI extends JPanel {
         JPanel roundPanel = new JPanel();
         roundPanel.add(roundLabel);
 
-        // 제시어 라벨 추가
         wordLabel = new JLabel("", SwingConstants.CENTER);
         wordLabel.setFont(new Font("default", Font.BOLD, 16));
         if (!isPresenter) {
@@ -98,12 +97,12 @@ public class GameUI extends JPanel {
         colorBtn.setPreferredSize(new Dimension(100, 40));
         colorBtn.setBackground(new Color(0x3B5998));
 
-        // 팝업 메뉴 생성
         JPopupMenu colorMenu = new JPopupMenu();
         Color[] colors = {Color.RED, Color.BLUE, Color.GREEN, Color.YELLOW, Color.ORANGE,
                 Color.PINK, Color.MAGENTA, Color.CYAN, Color.WHITE, Color.GRAY, Color.BLACK};
+
         // 색상 항목 추가
-        for (int i = 0; i< colors.length; i++) {
+        for (int i = 0; i < colors.length; i++) {
             JMenuItem colorItem = new JMenuItem();
             colorItem.setBackground(colors[i]);
             colorItem.setPreferredSize(new Dimension(40, 20));
@@ -120,9 +119,27 @@ public class GameUI extends JPanel {
         }
 
         // 버튼 클릭 시 팝업 메뉴 표시
-        colorBtn.addActionListener(e -> colorMenu.show(colorBtn, 0, -colorMenu.getPreferredSize().height));
+        colorBtn.addActionListener(e -> {
+            if(isPresenter) {
+                colorMenu.show(colorBtn, 0, -colorMenu.getPreferredSize().height);
+            }
+        });
 
+        // 지우기 버튼 생성
+        clearBtn = new JButton("지우기");
+        clearBtn.setForeground(Color.WHITE);
+        clearBtn.setPreferredSize(new Dimension(80, 40));
+        clearBtn.setBackground(new Color(0x3B5998));
 
+        // 지우기 버튼에 리스너 추가
+        clearBtn.addActionListener(e -> {
+            if(isPresenter) {
+                synchronized (pw) {
+                    pw.println("DRAW#CLEAR");
+                    pw.flush();
+                }
+            }
+        });
 
         submitBtn = new JButton("OK");
         submitBtn.setPreferredSize(new Dimension(80, 40));
@@ -132,9 +149,22 @@ public class GameUI extends JPanel {
 
         // 제시어를 맞추는 사람만 정답 제출 가능
         if (isPresenter) {
-            answerInput.setEnabled(false);
+            answerInput.setEditable(false);
             submitBtn.setEnabled(false);
             answerInput.setText("당신은 출제자입니다");
+
+            colorBtn.setEnabled(true);
+            colorBtn.setVisible(true);
+            clearBtn.setEnabled(true);
+            clearBtn.setVisible(true);
+        } else {
+            answerInput.setEditable(true);
+            submitBtn.setEnabled(true);
+
+            colorBtn.setEnabled(false);
+            colorBtn.setVisible(false);
+            clearBtn.setEnabled(false);
+            clearBtn.setVisible(false);
         }
 
         submitBtn.addActionListener(e -> {
@@ -144,27 +174,12 @@ public class GameUI extends JPanel {
             }
         });
 
-
-        // 지우기 버튼 생성
-        clearBtn = new JButton("지우기");
-        clearBtn.setForeground(Color.WHITE);
-        clearBtn.setPreferredSize(new Dimension(80, 40));
-        clearBtn.setBackground(new Color(0x3B5998));
-        clearBtn.addActionListener(e -> {
-            if(isPresenter)
-                synchronized (pw) {
-                    pw.println("DRAW#CLEAR");
-                    pw.flush();
-                }
-        });
-
         answerPanel.add(colorBtn);
         answerPanel.add(answerInput);
         answerPanel.add(submitBtn);
         answerPanel.add(clearBtn);
 
         add(answerPanel, BorderLayout.SOUTH);
-
     }
 
     private boolean checkAnswer() {
@@ -173,13 +188,7 @@ public class GameUI extends JPanel {
             return false;
         }
 
-        // 이미 정답 대기 중이면 추가 제출 방지
-        if (isWaitingForAnswer) {
-            return false;
-        }
-
         String answer = answerInput.getText().trim();
-        isWaitingForAnswer = true;
 
         // 서버에 정답 확인 요청 전송
         synchronized (pw) {
@@ -189,15 +198,6 @@ public class GameUI extends JPanel {
 
         // 입력창 초기화 및 비활성화
         answerInput.setText("");
-        answerInput.setEnabled(false);
-
-        // 2초 후 재입력 가능하도록 설정
-        Timer enableTimer = new Timer(2000, e -> {
-            isWaitingForAnswer = false;
-            answerInput.setEnabled(true);
-        });
-        enableTimer.setRepeats(false);
-        enableTimer.start();
 
         return false; // 서버의 응답을 기다리므로 항상 false 반환
     }
@@ -205,7 +205,6 @@ public class GameUI extends JPanel {
     // 서버로부터 정답 결과를 받았을 때 호출될 메서드
     public void handleAnswerResult(String username, boolean isCorrect) {
         SwingUtilities.invokeLater(() -> {
-            isWaitingForAnswer = false;
             answerInput.setEnabled(true);
 
             if (isCorrect) {
@@ -213,19 +212,33 @@ public class GameUI extends JPanel {
                         username + "님이 정답을 맞추셨습니다!",
                         "정답 알림",
                         JOptionPane.INFORMATION_MESSAGE);
-                currentRound++;
-                clearDrawingPanel();
+
+                // 정답자가 된 경우에도 UI 갱신
+                if (username.equals(userdata.getUsername())) {
+                    answerInput.setEditable(false);
+                    submitBtn.setEnabled(false);
+                    answerInput.setText("당신은 출제자입니다");
+
+                    // 그리기 관련 버튼들 활성화
+                    colorBtn.setEnabled(true);
+                    colorBtn.setVisible(true);
+                    clearBtn.setEnabled(true);
+                    clearBtn.setVisible(true);
+                }
+
                 // 10라운드 체크
-                if (currentRound > 10) {
-                    // 서버에 게임 종료 요청
+                if (currentRound >= 10) {
                     synchronized (pw) {
                         pw.println("GAME_END");
                         pw.flush();
                     }
-                } else {
-                    startRound();
                 }
+                clearDrawingPanel();
             }
+
+            // UI 갱신
+            revalidate();
+            repaint();
         });
     }
 
@@ -276,7 +289,7 @@ public class GameUI extends JPanel {
         topLabel.setOpaque(true);
         topLabel.setBackground(new Color(0x3B5998));
         topLabel.setForeground(Color.WHITE);
-        topLabel.setFont(new Font("default", Font.BOLD, 18));
+        topLabel.setFont(new Font("defualt", Font.BOLD, 18));
         topLabel.setPreferredSize(new Dimension(600, 40));
     }
 
@@ -291,34 +304,44 @@ public class GameUI extends JPanel {
     }
 
     public void handlePresenterChange(String username) {
-        // 현재 사용자가 새로운 출제자인지 확인
         isPresenter = userdata.getUsername().equals(username);
-
-        // DrawingPanel의 출제자 상태 업데이트
         drawingPanel.setPresenter(isPresenter);
 
-        // UI 업데이트
-        if (isPresenter) {
-            // 출제자가 된 경우
-            answerInput.setEnabled(false);
-            submitBtn.setEnabled(false);
-            answerInput.setText("당신은 출제자입니다");
-            // 제시어는 여기서 지우지 않음 - SUBJECT_WORD 메시지가 올 때까지 기다림
+        SwingUtilities.invokeLater(() -> {
+            if (isPresenter) {
+                // 출제자가 된 경우
+                answerInput.setEditable(false);
+                submitBtn.setEnabled(false);
+                answerInput.setText("당신은 출제자입니다");
 
-            // 그리기 관련 버튼들 활성화
-            colorBtn.setEnabled(true);
-            clearBtn.setEnabled(true);
-        } else {
-            // 참가자가 된 경우
-            answerInput.setEnabled(true);
-            submitBtn.setEnabled(true);
-            answerInput.setText("");
-            wordLabel.setText(""); // 참가자는 제시어를 볼 수 없음
+                // 그리기 관련 버튼들 활성화
+                colorBtn.setEnabled(true);
+                colorBtn.setVisible(true);
+                clearBtn.setEnabled(true);
+                clearBtn.setVisible(true);
 
-            // 그리기 관련 버튼들 비활성화
-            colorBtn.setEnabled(false);
-            clearBtn.setEnabled(false);
-        }
+                // 색상 초기화
+                colorBtn.setBorder(null);
+                selectedColor = 10;
+                drawingPanel.setLineColor(selectedColor);
+
+            } else {
+                // 참가자가 된 경우
+                answerInput.setEditable(true);
+                submitBtn.setEnabled(true);
+                answerInput.setText("");
+                wordLabel.setText("");
+
+                // 그리기 관련 버튼들 비활성화
+                colorBtn.setEnabled(false);
+                colorBtn.setVisible(false);
+                clearBtn.setEnabled(false);
+                clearBtn.setVisible(false);
+            }
+
+            revalidate();
+            repaint();
+        });
     }
 
     public void updateWord(String word) {
@@ -339,10 +362,6 @@ public class GameUI extends JPanel {
                     "라운드 종료",
                     JOptionPane.INFORMATION_MESSAGE);
 
-            // 그리기 패널 초기화
-            clearDrawingPanel();
-            // 새로운 출제자 설정
-            handlePresenterChange(newPresenter);
             currentRound++;
 
             // 10라운드 체크
@@ -354,6 +373,9 @@ public class GameUI extends JPanel {
                 }
             } else {
                 startRound();
+                // 새로운 출제자 설정
+                handlePresenterChange(newPresenter);
+                clearDrawingPanel();
             }
         });
     }
@@ -370,7 +392,7 @@ public class GameUI extends JPanel {
 
             // 우승자 표시
             JLabel winnerLabel = new JLabel("우승자: " + String.join(", ", winners), SwingConstants.CENTER);
-            winnerLabel.setFont(new Font("default", Font.BOLD, 24));
+            wordLabel.setFont(new Font("default", Font.BOLD, 20));
             winnerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
             resultsPanel.add(winnerLabel);
             resultsPanel.add(Box.createVerticalStrut(20));
@@ -411,6 +433,43 @@ public class GameUI extends JPanel {
 
             // 그리기 패널 초기화
             clearDrawingPanel();
+        });
+    }
+
+    public void handleWrongAnswer(String player) {
+        if (!player.equals(userdata.getUsername())) {
+            return;  // 본인이 틀린 경우에만 처리
+        }
+
+        SwingUtilities.invokeLater(() -> {
+            // 원래 배경색 저장
+            Color originalColor = answerInput.getBackground();
+
+            Timer blinkTimer = new Timer(200, null);
+            final int[] blinkCount = {0};
+
+            blinkTimer.addActionListener(e -> {
+                if (blinkCount[0] >= 6) {
+                    blinkTimer.stop();
+                    answerInput.setBackground(originalColor);
+                    answerInput.setEnabled(true);
+                    return;
+                }
+
+                if (blinkCount[0] % 2 == 0) {
+                    answerInput.setBackground(new Color(255, 200, 200));
+                } else {
+                    answerInput.setBackground(originalColor);
+                }
+                blinkCount[0]++;
+            });
+
+            blinkTimer.start();
+        });
+    }
+    public void updateRoundDisplay(int round) {
+        SwingUtilities.invokeLater(() -> {
+            roundLabel.setText("ROUND " + round);
         });
     }
 }
