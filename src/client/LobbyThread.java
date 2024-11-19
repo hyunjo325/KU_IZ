@@ -93,6 +93,12 @@ public class LobbyThread extends Thread{
                     System.out.println("게임이 이미 진행 중입니다.");
                     break;
                 }
+                if (parseLine[0].equals("SUBJECT")) {
+                    userdata.setQuizTopic(parseLine[1]);
+                    if (hostUI != null) {
+                        hostUI.updateQuizTopic(parseLine[1]);  // 새로운 메서드 추가
+                    }
+                }
                 if (parseLine[0].equals("SUBJECT_WORD")) {
                     if (hostUI != null && hostUI.getGameUI() != null) {
                         hostUI.getGameUI().updateWord(parseLine[2]);
@@ -102,9 +108,15 @@ public class LobbyThread extends Thread{
                     String username = parseLine[1];
                     String score = parseLine[2];
                     if (hostUI != null && hostUI.getGameUI() != null) {
-                        hostUI.getGameUI().handleAnswerResult(username, true);
-                        hostUI.getGameUI().updateScores(username, score);
                         hostUI.getGameUI().handlePresenterChange(username);
+                        hostUI.getGameUI().updateScores(username, score);
+                        hostUI.getGameUI().handleAnswerResult(username, true);
+
+                    }
+                }
+                if (parseLine[0].equals("WRONG_ANSWER")) {
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().handleWrongAnswer(parseLine[1]);
                     }
                 }
                 if (parseLine[0].equals("TIME")) {
@@ -162,6 +174,12 @@ public class LobbyThread extends Thread{
                     if (hostUI != null && hostUI.getGameUI() != null) {
                         hostUI.getGameUI().handlePresenterChange(newPresenter);
                         hostUI.getGameUI().clearDrawingPanel();
+                    }
+                }
+                if (parseLine[0].equals("UPDATE_ROUND")) {
+                    int newRound = Integer.parseInt(parseLine[1]);
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().updateRoundDisplay(newRound);
                     }
                 }
             }
