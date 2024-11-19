@@ -111,12 +111,15 @@ public class LobbyThread extends Thread{
                         hostUI.getGameUI().handlePresenterChange(username);
                         hostUI.getGameUI().updateScores(username, score);
                         hostUI.getGameUI().handleAnswerResult(username, true);
-
+                        hostUI.getGameUI().updateRoundDisplay(Integer.parseInt(parseLine[3])); // 라운드 정보 처리
+                        hostUI.getGameUI().revalidate();
+                        hostUI.getGameUI().repaint();
                     }
                 }
                 if (parseLine[0].equals("WRONG_ANSWER")) {
                     if (hostUI != null && hostUI.getGameUI() != null) {
                         hostUI.getGameUI().handleWrongAnswer(parseLine[1]);
+
                     }
                 }
                 if (parseLine[0].equals("TIME")) {
@@ -171,8 +174,10 @@ public class LobbyThread extends Thread{
                 }
                 if (parseLine[0].equals("TURN_START")) {
                     String newPresenter = parseLine[1];
+                    int currentRound = Integer.parseInt(parseLine[2]); // 서버에서 보낸 현재 라운드 정보
                     if (hostUI != null && hostUI.getGameUI() != null) {
                         hostUI.getGameUI().handlePresenterChange(newPresenter);
+                        hostUI.getGameUI().updateRoundDisplay(currentRound); // 현재 라운드로 표시 업데이트
                         hostUI.getGameUI().clearDrawingPanel();
                     }
                 }
@@ -180,6 +185,8 @@ public class LobbyThread extends Thread{
                     int newRound = Integer.parseInt(parseLine[1]);
                     if (hostUI != null && hostUI.getGameUI() != null) {
                         hostUI.getGameUI().updateRoundDisplay(newRound);
+                        hostUI.getGameUI().revalidate();
+                        hostUI.getGameUI().repaint();
                     }
                 }
             }

@@ -85,7 +85,6 @@ public class GameInfo {
     public void updateScore(String username, int points) {
         if (initialPlayers.contains(username)) {
             gameScores.put(username, gameScores.getOrDefault(username, 0) + points);
-            currentRound++;
         }
     }
     public void updateRound() {

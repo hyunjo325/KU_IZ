@@ -212,10 +212,22 @@ public class GameUI extends JPanel {
                         username + "님이 정답을 맞추셨습니다!",
                         "정답 알림",
                         JOptionPane.INFORMATION_MESSAGE);
-                currentRound++;
+
+                // 정답자가 된 경우에도 UI 갱신
+                if (username.equals(userdata.getUsername())) {
+                    answerInput.setEditable(false);
+                    submitBtn.setEnabled(false);
+                    answerInput.setText("당신은 출제자입니다");
+
+                    // 그리기 관련 버튼들 활성화
+                    colorBtn.setEnabled(true);
+                    colorBtn.setVisible(true);
+                    clearBtn.setEnabled(true);
+                    clearBtn.setVisible(true);
+                }
+
                 // 10라운드 체크
-                if (currentRound > 10) {
-                    // 서버에 게임 종료 요청
+                if (currentRound >= 10) {
                     synchronized (pw) {
                         pw.println("GAME_END");
                         pw.flush();
@@ -223,6 +235,10 @@ public class GameUI extends JPanel {
                 }
                 clearDrawingPanel();
             }
+
+            // UI 갱신
+            revalidate();
+            repaint();
         });
     }
 
@@ -309,7 +325,6 @@ public class GameUI extends JPanel {
                 selectedColor = 10;
                 drawingPanel.setLineColor(selectedColor);
 
-                startRound();
             } else {
                 // 참가자가 된 경우
                 answerInput.setEditable(true);

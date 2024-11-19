@@ -137,14 +137,15 @@ public class ClientThread extends Thread {
                     boolean isCorrect = answer.equals(currentWord);
 
                     if (isCorrect) {
-                        // 이전 출제자 저장
+                        // 이전 출제자(그림 그린 사람) 저장
                         String previousPresenter = game.getCurrentPresenter();
 
                         // 새 제시어 준비
                         String word = game.getRandomWord();
 
-                        // 점수 업데이트 및 라운드 진행
-//                        game.handleCorrectAnswer(username, previousPresenter);
+                        // 점수 처리
+                        game.updateScore(username, 10);       // 정답자 점수
+                        game.updateScore(previousPresenter, 10); // 출제자 점수
 
                         // 점수 업데이트 메시지 전송
                         String presenterScoreMessage = "SCORE_UP#" + previousPresenter + "#10";
@@ -153,35 +154,26 @@ public class ClientThread extends Thread {
                         // 출제자 변경
                         game.setCurrentPresenter(username);
 
-                        // 정답 맞춤 처리
-                        String correctMessage = "CORRECT_ANSWER#" + username + "#10";
-                        System.out.println("Correct answer by: " + username);
+                        // 정답 맞춤 처리 (라운드 정보 포함)
+                        String correctMessage = "CORRECT_ANSWER#" + username + "#10#" + game.getCurrentRound();
                         sendall(correctMessage);
 
                         // 새로운 제시어 전송
                         String subjectMessage = "SUBJECT_WORD#" + username + "#" + word;
-                        synchronized(userVector) {
-                            for (UserPair user : userVector) {
-                                if (user.getUsername().equals(username)) {
-                                    user.getPw().println(subjectMessage);
-                                    user.getPw().flush();
-                                }
+                        for (UserPair user : userVector) {
+                            if (user.getUsername().equals(username)) {
+                                user.getPw().println(subjectMessage);
+                                user.getPw().flush();
                             }
                         }
 
+                        // 라운드 업데이트 (한 번만 실행)
+                        game.updateRound();
+
                         // 타이머 리셋
                         game.setupTimer();
-
-                        // 10라운드 체크
-                        if (game.getCurrentRound() > 10) {
-                            String resultMessage = game.generateGameEndMessage();
-                            sendall(resultMessage);
-                            game.setRunning(false);
-                            game.reset();
-                            scores.clear();
-                        }
                     } else {
-                        sendself("WRONG_ANSWER#"+ username); // 오답일 경우
+                        sendself("WRONG_ANSWER#" + username);
                     }
                 }
 
@@ -224,7 +216,7 @@ public class ClientThread extends Thread {
                         sendall("PRESENTER_DISCONNECTED#" + username);
 
                         // 2. 모든 클라이언트에게 새로운 턴 시작 알림
-                        sendall("TURN_START#" + newPresenter);
+                        sendall("TURN_START#" + newPresenter+"#"+game.getCurrentRound());
 
                         // 3. 새로운 출제자에게 제시어 전송 (마지막에 실행)
                         synchronized(userVector) {
@@ -238,7 +230,6 @@ public class ClientThread extends Thread {
 
                         // 4. 타이머 리셋
                         game.setupTimer();
-                        game.updateRound();
                     }
                 }
 
