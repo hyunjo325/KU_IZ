@@ -64,7 +64,7 @@ public class GameUI extends JPanel {
 
         // 제시어 라벨 추가
         wordLabel = new JLabel("", SwingConstants.CENTER);
-        wordLabel.setFont(new Font("Arial", Font.BOLD, 16));
+        wordLabel.setFont(new Font("default", Font.BOLD, 16));
         if (!isPresenter) {
             wordLabel.setText("");
         }
@@ -276,7 +276,7 @@ public class GameUI extends JPanel {
         topLabel.setOpaque(true);
         topLabel.setBackground(new Color(0x3B5998));
         topLabel.setForeground(Color.WHITE);
-        topLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        topLabel.setFont(new Font("default", Font.BOLD, 18));
         topLabel.setPreferredSize(new Dimension(600, 40));
     }
 
@@ -370,7 +370,7 @@ public class GameUI extends JPanel {
 
             // 우승자 표시
             JLabel winnerLabel = new JLabel("우승자: " + String.join(", ", winners), SwingConstants.CENTER);
-            winnerLabel.setFont(new Font("Arial", Font.BOLD, 24));
+            winnerLabel.setFont(new Font("default", Font.BOLD, 24));
             winnerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
             resultsPanel.add(winnerLabel);
             resultsPanel.add(Box.createVerticalStrut(20));
@@ -387,7 +387,7 @@ public class GameUI extends JPanel {
                                 entry.getKey() + ": " + entry.getValue() + "점",
                                 SwingConstants.CENTER
                         );
-                        scoreLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+                        scoreLabel.setFont(new Font("default", Font.PLAIN, 18));
                         if (winners.contains(entry.getKey())) {
                             scoreLabel.setForeground(new Color(0x3B5998));
                             scoreLabel.setFont(scoreLabel.getFont().deriveFont(Font.BOLD));

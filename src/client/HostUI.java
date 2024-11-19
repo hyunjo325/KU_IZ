@@ -178,7 +178,7 @@ public class HostUI extends JFrame {
         playerListPanel.removeAll();
         for (String player : players) {
             JLabel playerLabel = new JLabel(player, SwingConstants.CENTER);
-            playerLabel.setFont(new Font("Arial", Font.BOLD, 14));
+            playerLabel.setFont(new Font("default", Font.BOLD, 14));
             playerListPanel.add(playerLabel);
         }
         playerListPanel.revalidate();
@@ -192,7 +192,7 @@ public class HostUI extends JFrame {
         topLabel.setOpaque(true);
         topLabel.setBackground(new Color(0x3B5998));
         topLabel.setForeground(Color.WHITE);
-        topLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        topLabel.setFont(new Font("default", Font.BOLD, 18));
         topLabel.setPreferredSize(new Dimension(600, 40));
     }
 

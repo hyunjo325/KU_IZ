@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="feat: 그림 그리던 사람 연결 끊어지면 다른 사람으로 그리도록 구현">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_17_24__1_36PM___.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_17_24__1_36PM___.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/GameUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/client/GameUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/GameUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,28 +44,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.server.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;jungeun&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/hyunj/OneDrive/바탕 화면/4학년 2학기/네트워크프로그래밍/팀플/CatchMindClient&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.server.Main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "hj",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/hyunj/OneDrive/바탕 화면/4학년 2학기/네트워크프로그래밍/팀플/CatchMindClient",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\hyunj\OneDrive\바탕 화면\4학년 2학기\네트워크프로그래밍\팀플\CatchMindClient\src\server" />
@@ -76,6 +79,7 @@
     <configuration name="Main" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="CatchMindClient" />
+      <option name="VM_PARAMETERS" value="-Dfile.encoding=UTF-8" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -134,6 +138,10 @@
       <workItem from="1731382395341" duration="1620000" />
       <workItem from="1731425002370" duration="7000" />
       <workItem from="1731466085149" duration="17560000" />
+      <workItem from="1731975253972" duration="500000" />
+      <workItem from="1731976260513" duration="182000" />
+      <workItem from="1731978033996" duration="185000" />
+      <workItem from="1731981724157" duration="1132000" />
     </task>
     <task id="LOCAL-00001" summary="변경">
       <option name="closed" value="true" />
@@ -253,5 +261,9 @@
     <MESSAGE value="feat: 점수 보여주기까지 구현" />
     <MESSAGE value="feat: 그림 그리던 사람 연결 끊어지면 다른 사람으로 그리도록 구현" />
     <option name="LAST_COMMIT_MESSAGE" value="feat: 그림 그리던 사람 연결 끊어지면 다른 사람으로 그리도록 구현" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
