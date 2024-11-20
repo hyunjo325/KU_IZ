@@ -93,7 +93,7 @@ public class GameUI extends JPanel {
 
         // 색상 선택 버튼 생성
         colorBtn = new JButton("색상 선택");
-        colorBtn.setForeground(Color.WHITE);
+        colorBtn.setForeground(Color.BLACK);
         colorBtn.setPreferredSize(new Dimension(100, 40));
         colorBtn.setBackground(new Color(0x3B5998));
 
@@ -127,7 +127,7 @@ public class GameUI extends JPanel {
 
         // 지우기 버튼 생성
         clearBtn = new JButton("지우기");
-        clearBtn.setForeground(Color.WHITE);
+        clearBtn.setForeground(Color.BLACK);
         clearBtn.setPreferredSize(new Dimension(80, 40));
         clearBtn.setBackground(new Color(0x3B5998));
 
@@ -418,12 +418,89 @@ public class GameUI extends JPanel {
                     });
 
             resultsPanel.add(scoresPanel);
-            add(resultsPanel, BorderLayout.CENTER);
 
+            // '그린 그림 보기' 버튼 추가
+            JButton viewDrawingsBtn = new JButton("그린 그림 보기");
+
+            viewDrawingsBtn.setPreferredSize(new Dimension(100, 40));
+            viewDrawingsBtn.setBackground(new Color(0x3B5998));
+            viewDrawingsBtn.setForeground(Color.BLACK);
+            viewDrawingsBtn.setFocusPainted(false);
+
+            viewDrawingsBtn.addActionListener(e -> {
+//                // System.out.println("그린 그림 보기 버튼 클릭됨");
+//                removeAll();
+//                add(showDrawingGalleryPanel(), BorderLayout.CENTER); // 그림 갤러리 패널 추가
+//                revalidate();
+//                repaint();
+//                // System.out.println("그린 그림 패널로 전환 완료");
+
+                SwingUtilities.invokeLater(() -> {
+                    removeAll();
+                    add(showDrawingGalleryPanel(), BorderLayout.CENTER);
+                    revalidate();
+                    repaint();
+                });
+            });
+            resultsPanel.add(Box.createVerticalStrut(20));
+            resultsPanel.add(viewDrawingsBtn);
+
+            add(resultsPanel, BorderLayout.CENTER);
             revalidate();
             repaint();
         });
     }
+
+    private JPanel showDrawingGalleryPanel() {
+        // 메인 패널 생성
+        JPanel galleryPanel = new JPanel(new BorderLayout());
+        galleryPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        // 그림 목록 패널 생성 (2행 5열)
+        JPanel drawingListPanel = new JPanel(new GridLayout(2, 5, 10, 10));
+        drawingListPanel.setBorder(BorderFactory.createTitledBorder("그린 그림 목록"));
+
+        // 임시로 그림 데이터를 채우기 (실제 데이터를 넣으면 여기를 변경)
+        for (int i = 1; i <= 10; i++) {
+            JPanel drawingPanel = new JPanel();
+            drawingPanel.setBorder(BorderFactory.createTitledBorder("제시어: " + i));
+            drawingPanel.setPreferredSize(new Dimension(100, 100));
+
+            JLabel placeholder = new JLabel("그림 " + i, SwingConstants.CENTER);
+            placeholder.setPreferredSize(new Dimension(80, 80));
+            placeholder.setOpaque(true);
+            placeholder.setBackground(new Color(200, 200, 200));
+
+            drawingPanel.add(placeholder);
+            drawingListPanel.add(drawingPanel);
+        }
+
+        JButton exitBtn = new JButton("EXIT");
+
+        exitBtn.setPreferredSize(new Dimension(100, 40));
+        exitBtn.setBackground(new Color(0x3B5998));
+        exitBtn.setForeground(Color.BLACK);
+        exitBtn.setFocusPainted(false);
+
+        exitBtn.addActionListener(e -> {
+            SwingUtilities.invokeLater(() -> {
+            // 프로그램 종료
+            System.exit(0);
+            });
+        });
+
+        // 버튼 패널 생성
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(exitBtn);
+
+
+        galleryPanel.add(drawingListPanel, BorderLayout.CENTER);
+        galleryPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        return galleryPanel;
+    }
+
+
     public void handlePresenterDisconnected(String disconnectedUser) {
         SwingUtilities.invokeLater(() -> {
             JOptionPane.showMessageDialog(this,
