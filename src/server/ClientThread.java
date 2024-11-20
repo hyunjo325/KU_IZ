@@ -222,7 +222,8 @@ public class ClientThread extends Thread {
                         if (game.getGameTimer() != null) {
                             game.getGameTimer().cancel();
                         }
-                        String resultMessage = game.generateGameEndMessage();
+                        // Round 값을 보내 그림 몇 개만 출력하도록 함
+                        String resultMessage = game.unexpectedGameEndMessage();
                         sendall(resultMessage);
                         game.setRunning(false);
                         game.reset();

@@ -172,9 +172,39 @@ public class LobbyThread extends Thread{
                     }
 
                     if (hostUI != null && hostUI.getGameUI() != null) {
-                        hostUI.getGameUI().showFinalResults(finalScores, winners);
+                        hostUI.getGameUI().showFinalResults(finalScores, winners, 10);
                     }
                 }
+
+                if (parseLine[0].equals("FORCE_GAME_END")){
+                    // 게임 결과 파싱
+                    Map<String, Integer> finalScores = new HashMap<>();
+                    List<String> winners = new ArrayList<>();
+
+                    int i = 1;
+
+                    // 몇 라운드에서 끝났는지 파싱
+                    int finishedRound = Integer.parseInt(parseLine[i++]);
+
+                    while (i < parseLine.length && !parseLine[i].equals("WIN")) {
+                        String username = parseLine[i];
+                        int score = Integer.parseInt(parseLine[i + 1]);
+                        finalScores.put(username, score);
+                        i += 2;
+                    }
+
+                    // 우승자 목록 파싱
+                    i++; // "WIN" 다음부터
+                    while (i < parseLine.length) {
+                        winners.add(parseLine[i]);
+                        i++;
+                    }
+
+                    if (hostUI != null && hostUI.getGameUI() != null) {
+                        hostUI.getGameUI().showFinalResults(finalScores, winners, finishedRound);
+                    }
+                }
+
                 if (parseLine[0].equals("SCORE_UP")) {
                     String username = parseLine[1];
                     String score = parseLine[2];
