@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="feat: 색상버튼 비활성화 해결">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_17_24__1_36PM___.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_17_24__1_36PM___.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/client/DrawingPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/client/DrawingPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/ClientThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/ClientThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/server/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/GameInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="jungeun" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -82,7 +74,7 @@
       <recent name="server" />
     </key>
   </component>
-  <component name="RunManager" selected="애플리케이션.Main">
+  <component name="RunManager" selected="애플리케이션.server.Main">
     <configuration name="Main" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="CatchMindClient" />
@@ -110,8 +102,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="애플리케이션.Main" />
         <item itemvalue="애플리케이션.server.Main" />
+        <item itemvalue="애플리케이션.Main" />
       </list>
     </recent_temporary>
   </component>
