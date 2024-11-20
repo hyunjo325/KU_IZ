@@ -21,6 +21,7 @@ public class GameUI extends JPanel {
     private boolean isPresenter;
     private JLabel timerLabel;
     private JLabel scoreLabel;
+    private JLabel playerInfoLabel; // 참가자 이름
     private JLabel roundLabel;
     private JLabel wordLabel;  // 제시어
     private JTextField answerInput;
@@ -33,6 +34,7 @@ public class GameUI extends JPanel {
     private JButton colorBtn;
     private JButton submitBtn;
     private JButton clearBtn;
+    private UserData userData;
 
 
     public GameUI(String quizTopic, List<String> players, boolean isPresenter, Socket sock, PrintWriter pw, BufferedReader br, UserData userdata) {
@@ -71,10 +73,13 @@ public class GameUI extends JPanel {
         wordPanel.add(wordLabel);
 
         timerLabel = new JLabel("남은 시간 : "+ timeLeft + "초");
-        scoreLabel = new JLabel("점수: 0점");
+        scoreLabel = new JLabel("/ 점수: 0점");
+        playerInfoLabel = new JLabel("/ 플레이어: "+ userdata.getUsername());
+
         JPanel infoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         infoPanel.add(timerLabel);
         infoPanel.add(scoreLabel);
+        infoPanel.add(playerInfoLabel);
 
         topPanel.add(roundPanel);
         topPanel.add(wordPanel);
@@ -379,6 +384,91 @@ public class GameUI extends JPanel {
             }
         });
     }
+//    public void showFinalResults(Map<String, Integer> finalScores, List<String> winners) {
+////        JPanel panel = new JPanel(new BorderLayout());
+////        panel.setBackground(Color.WHITE);
+////
+////        JLabel topLabel = new JLabel("방 개설", SwingConstants.CENTER);
+////        styleTopPanel(topLabel);
+////        panel.add(topLabel, BorderLayout.NORTH);
+//
+//        SwingUtilities.invokeLater(() -> {
+//            // 게임 UI 클리어
+//            removeAll();
+//            setLayout(new BorderLayout());
+//
+//            // 결과 패널 생성
+//            JPanel resultsPanel = new JPanel();
+//            resultsPanel.setBackground(Color.WHITE);
+//            resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
+//            resultsPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+//
+////            // 상단 패널
+////            JLabel topLabel = new JLabel("최종 순위", SwingConstants.CENTER);
+////            styleTopPanel(topLabel);
+////            resultsPanel.add(topLabel,BorderLayout.NORTH);
+//
+//            // 우승자 표시
+//            JLabel winnerLabel = new JLabel("우승자: " + String.join(", ", winners), SwingConstants.CENTER);
+//            wordLabel.setFont(new Font("default", Font.BOLD, 20));
+//            winnerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+//            resultsPanel.add(winnerLabel);
+//            resultsPanel.add(Box.createVerticalStrut(20));
+//
+//            // 모든 플레이어 점수 표시
+//            JPanel scoresPanel = new JPanel(new GridLayout(0, 1, 5, 5));
+//            scoresPanel.setBorder(BorderFactory.createTitledBorder("최종 점수"));
+//
+//            // 점수 순으로 정렬
+//            finalScores.entrySet().stream()
+//                    .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+//                    .forEach(entry -> {
+//                        JLabel scoreLabel = new JLabel(
+//                                entry.getKey() + ": " + entry.getValue() + "점",
+//                                SwingConstants.CENTER
+//                        );
+//                        scoreLabel.setFont(new Font("default", Font.PLAIN, 18));
+//                        if (winners.contains(entry.getKey())) {
+//                            scoreLabel.setForeground(new Color(0x3B5998));
+//                            scoreLabel.setFont(scoreLabel.getFont().deriveFont(Font.BOLD));
+//                        }
+//                        scoresPanel.add(scoreLabel);
+//                    });
+//
+//            resultsPanel.add(scoresPanel);
+//
+//            // '그린 그림 보기' 버튼 추가
+//            JButton viewDrawingsBtn = new JButton("그린 그림 보기");
+//
+//            viewDrawingsBtn.setPreferredSize(new Dimension(100, 40));
+//            viewDrawingsBtn.setBackground(new Color(0x3B5998));
+//            viewDrawingsBtn.setForeground(Color.BLACK);
+//            viewDrawingsBtn.setFocusPainted(false);
+//
+//            viewDrawingsBtn.addActionListener(e -> {
+////                // System.out.println("그린 그림 보기 버튼 클릭됨");
+////                removeAll();
+////                add(showDrawingGalleryPanel(), BorderLayout.CENTER); // 그림 갤러리 패널 추가
+////                revalidate();
+////                repaint();
+////                // System.out.println("그린 그림 패널로 전환 완료");
+//
+//                SwingUtilities.invokeLater(() -> {
+//                    removeAll();
+//                    add(showDrawingGalleryPanel(), BorderLayout.CENTER);
+//                    revalidate();
+//                    repaint();
+//                });
+//            });
+//            resultsPanel.add(Box.createVerticalStrut(20));
+//            resultsPanel.add(viewDrawingsBtn);
+//
+//            add(resultsPanel, BorderLayout.CENTER);
+//            revalidate();
+//            repaint();
+//        });
+//    }
+
     public void showFinalResults(Map<String, Integer> finalScores, List<String> winners) {
         SwingUtilities.invokeLater(() -> {
             // 게임 UI 클리어
@@ -386,20 +476,33 @@ public class GameUI extends JPanel {
             setLayout(new BorderLayout());
 
             // 결과 패널 생성
-            JPanel resultsPanel = new JPanel();
-            resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
-            resultsPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            JPanel resultsPanel = new JPanel(new BorderLayout());
+            resultsPanel.setBackground(Color.WHITE);
+            resultsPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 30, 0));
+
+            // 상단 "최종 순위" 라벨
+            JLabel topLabel = new JLabel("최종 순위", SwingConstants.CENTER);
+            styleTopPanel(topLabel);
+            resultsPanel.add(topLabel, BorderLayout.NORTH);
+
+            // 중앙 결과 패널
+            JPanel centerPanel = new JPanel();
+            centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+            centerPanel.setBackground(Color.WHITE);
 
             // 우승자 표시
             JLabel winnerLabel = new JLabel("우승자: " + String.join(", ", winners), SwingConstants.CENTER);
-            wordLabel.setFont(new Font("default", Font.BOLD, 20));
+            winnerLabel.setFont(new Font("default", Font.BOLD, 24));
+            winnerLabel.setForeground(Color.BLACK);
             winnerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-            resultsPanel.add(winnerLabel);
-            resultsPanel.add(Box.createVerticalStrut(20));
+            centerPanel.add(winnerLabel);
+
+            // 간격 추가
+            centerPanel.add(Box.createVerticalStrut(30));
 
             // 모든 플레이어 점수 표시
-            JPanel scoresPanel = new JPanel(new GridLayout(0, 1, 5, 5));
-            scoresPanel.setBorder(BorderFactory.createTitledBorder("최종 점수"));
+            JPanel scoresPanel = new JPanel(new GridLayout(4, 2, 10, 10));
+            scoresPanel.setBackground(Color.WHITE);
 
             // 점수 순으로 정렬
             finalScores.entrySet().stream()
@@ -417,35 +520,32 @@ public class GameUI extends JPanel {
                         scoresPanel.add(scoreLabel);
                     });
 
-            resultsPanel.add(scoresPanel);
+            centerPanel.add(scoresPanel);
 
-            // '그린 그림 보기' 버튼 추가
+            // '그린 그림 보기' 버튼
             JButton viewDrawingsBtn = new JButton("그린 그림 보기");
-
             viewDrawingsBtn.setPreferredSize(new Dimension(100, 40));
             viewDrawingsBtn.setBackground(new Color(0x3B5998));
             viewDrawingsBtn.setForeground(Color.BLACK);
             viewDrawingsBtn.setFocusPainted(false);
-
             viewDrawingsBtn.addActionListener(e -> {
-//                // System.out.println("그린 그림 보기 버튼 클릭됨");
-//                removeAll();
-//                add(showDrawingGalleryPanel(), BorderLayout.CENTER); // 그림 갤러리 패널 추가
-//                revalidate();
-//                repaint();
-//                // System.out.println("그린 그림 패널로 전환 완료");
-
-                SwingUtilities.invokeLater(() -> {
-                    removeAll();
-                    add(showDrawingGalleryPanel(), BorderLayout.CENTER);
-                    revalidate();
-                    repaint();
-                });
+                removeAll();
+                add(showDrawingGalleryPanel(), BorderLayout.CENTER);
+                revalidate();
+                repaint();
             });
-            resultsPanel.add(Box.createVerticalStrut(20));
-            resultsPanel.add(viewDrawingsBtn);
 
-            add(resultsPanel, BorderLayout.CENTER);
+//            centerPanel.add(Box.createVerticalStrut(20));
+            JPanel btnPanel = new JPanel();
+            btnPanel.setBackground(Color.WHITE);
+            btnPanel.add(viewDrawingsBtn);
+            resultsPanel.add(btnPanel, BorderLayout.SOUTH);
+
+            // 메인 패널에 중앙 패널 추가
+            resultsPanel.add(centerPanel, BorderLayout.CENTER);
+            add(resultsPanel);
+
+            // UI 갱신
             revalidate();
             repaint();
         });
@@ -454,15 +554,23 @@ public class GameUI extends JPanel {
     private JPanel showDrawingGalleryPanel() {
         // 메인 패널 생성
         JPanel galleryPanel = new JPanel(new BorderLayout());
-        galleryPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        galleryPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 20, 0));
+        galleryPanel.setBackground(Color.WHITE);
+
+        // 상단 "최종 순위" 라벨
+        JLabel topLabel = new JLabel("그린 그림 목록", SwingConstants.CENTER);
+        styleTopPanel(topLabel);
+        galleryPanel.add(topLabel, BorderLayout.NORTH);
 
         // 그림 목록 패널 생성 (2행 5열)
         JPanel drawingListPanel = new JPanel(new GridLayout(2, 5, 10, 10));
-        drawingListPanel.setBorder(BorderFactory.createTitledBorder("그린 그림 목록"));
+        drawingListPanel.setBackground(Color.WHITE);
+//        drawingListPanel.setBorder(BorderFactory.createTitledBorder("그린 그림 목록"));
 
-        // 임시로 그림 데이터를 채우기 (실제 데이터를 넣으면 여기를 변경)
+        // 임시로 그림 데이터
         for (int i = 1; i <= 10; i++) {
             JPanel drawingPanel = new JPanel();
+            drawingPanel.setBackground(Color.WHITE);
             drawingPanel.setBorder(BorderFactory.createTitledBorder("제시어: " + i));
             drawingPanel.setPreferredSize(new Dimension(100, 100));
 
@@ -491,8 +599,8 @@ public class GameUI extends JPanel {
 
         // 버튼 패널 생성
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.WHITE);
         buttonPanel.add(exitBtn);
-
 
         galleryPanel.add(drawingListPanel, BorderLayout.CENTER);
         galleryPanel.add(buttonPanel, BorderLayout.SOUTH);
