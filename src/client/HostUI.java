@@ -19,6 +19,7 @@ public class HostUI extends JFrame {
     private JPanel mainPanel;
     private JPanel playerListPanel;
     private GameUI gameUI;
+    private JLabel quizTopicLabel;
 
 
     public HostUI(boolean isHost, Socket sock, PrintWriter pw, BufferedReader br, UserData userdata) {
@@ -99,11 +100,13 @@ public class HostUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (userdata.getQuizTopic() != null) {
+                    JOptionPane.showMessageDialog(null, "주제가 '" + userdata.getQuizTopic() + "'로 선택되었습니다.", "주제 선택 완료", JOptionPane.INFORMATION_MESSAGE);
                     cardLayout.show(mainPanel, "WaitingRoom");
                     sendQuizTopic();
+                    updateQuizTopicLabel(); // 대기방의 주제 라벨 업데이트
                     updatePlayerList();
                 } else {
-                    JOptionPane.showMessageDialog(panel, "주제를 선택해 주세요.");
+                    JOptionPane.showMessageDialog(panel, "주제를 선택해 주세요.", "메세지", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         });
@@ -113,6 +116,15 @@ public class HostUI extends JFrame {
         panel.add(okPanel, BorderLayout.SOUTH);
 
         return panel;
+    }
+
+    private void updateQuizTopicLabel() {
+        // 퀴즈 주제 라벨 업데이트
+        if (quizTopicLabel != null) {
+            quizTopicLabel.setText("퀴즈 주제: " + userdata.getQuizTopic());
+            quizTopicLabel.revalidate();
+            quizTopicLabel.repaint();
+        }
     }
 
     private JPanel waitingRoom(){
