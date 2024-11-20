@@ -2,6 +2,7 @@ package client;
 
 import server.GameInfo;
 
+import javax.swing.*;
 import java.awt.*;
 import java.net.*;
 import java.io.*;
@@ -36,6 +37,10 @@ public class LobbyThread extends Thread{
                 String[] parseLine = line.split("#");
                 if (parseLine[0].equals("CHECK_CAPTAIN")){                  //방장이 처음으로 들어옴
                     System.out.println("당신은 방장입니다.");
+                    JOptionPane.showMessageDialog(null,
+                            "당신은 방장입니다.",
+                            "메세지",
+                            JOptionPane.INFORMATION_MESSAGE);
                     userdata.setIsRoomOwner(true);
                     hostUI = new HostUI(userdata.getIsRoomOwner(), sock, pw, br, userdata);
                     //chooseSubject();
@@ -43,6 +48,10 @@ public class LobbyThread extends Thread{
                 }
                 if (parseLine[0].equals("NEW_CAPTAIN")){                    //방장이 바뀌었음을 알리고, 게임이 진행 중이 아니라면 방장이 새로 주제 선택 가능
                     System.out.println("당신이 방장이 되었습니다.");
+                    JOptionPane.showMessageDialog(null,
+                            "당신이 방장이 되었습니다.",
+                            "메세지",
+                            JOptionPane.INFORMATION_MESSAGE);
                     userdata.setIsRoomOwner(true);
                     updateRoomOwner();
                     if (!gameRunning){
@@ -69,8 +78,11 @@ public class LobbyThread extends Thread{
                     userdata.setQuizTopic(parseLine[1]);
                 }
 
-                if (parseLine[0].equals("GAME_DENIED")){                    //아무도 없어서 게임을 시작하지 않음
-                    //다른 참가자가 없어서 게임을 시작하지 않음을 알리는 글 추가?
+                if (parseLine[0].equals("GAME_DENIED")){
+                    JOptionPane.showMessageDialog(null,
+                            "참가자가 없어서 게임을 시작할 수 없습니다.",
+                            "메세지",
+                            JOptionPane.INFORMATION_MESSAGE);
                 }
                 if (parseLine[0].equals("GAME_STARTED")){                   //게임 시작
                     gameRunning = true;
@@ -131,6 +143,10 @@ public class LobbyThread extends Thread{
                     String newPresenter = parseLine[1];
                     if (hostUI != null && hostUI.getGameUI() != null) {
                         // 시간 초과 메시지를 표시하고 새로운 출제자로 변경
+                        JOptionPane.showMessageDialog(null,
+                                "시간 초과되었습니다.\n새로운 출제자로 변경됩니다.",
+                                "메세지",
+                                JOptionPane.INFORMATION_MESSAGE);
                         hostUI.getGameUI().handlePresenterChange(newPresenter);
                         hostUI.getGameUI().handleTimeUp(newPresenter);
                     }
