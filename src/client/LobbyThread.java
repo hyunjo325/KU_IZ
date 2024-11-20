@@ -48,13 +48,13 @@ public class LobbyThread extends Thread{
                 }
                 if (parseLine[0].equals("NEW_CAPTAIN")){                    //방장이 바뀌었음을 알리고, 게임이 진행 중이 아니라면 방장이 새로 주제 선택 가능
                     System.out.println("당신이 방장이 되었습니다.");
-                    JOptionPane.showMessageDialog(null,
-                            "당신이 방장이 되었습니다.",
-                            "메세지",
-                            JOptionPane.INFORMATION_MESSAGE);
                     userdata.setIsRoomOwner(true);
                     updateRoomOwner();
                     if (!gameRunning){
+                        JOptionPane.showMessageDialog(null,
+                                "당신이 방장이 되었습니다.",
+                                "메세지",
+                                JOptionPane.INFORMATION_MESSAGE);
                         hostUI.dispose();
                         hostUI = new HostUI(userdata.getIsRoomOwner(), sock, pw, br, userdata);
                     }
