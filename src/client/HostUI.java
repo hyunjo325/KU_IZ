@@ -200,7 +200,7 @@ public class HostUI extends JFrame {
         return gameUI;
     }
 
-    private void styleTopPanel(JLabel topLabel) {
+    public void styleTopPanel(JLabel topLabel) {
         topLabel.setOpaque(true);
         topLabel.setBackground(new Color(0x3B5998));
         topLabel.setForeground(Color.WHITE);
