@@ -565,9 +565,8 @@ public class GameUI extends JPanel {
         // 그림 목록 패널 생성 (2행 5열)
         JPanel drawingListPanel = new JPanel(new GridLayout(2, 5, 10, 10));
         drawingListPanel.setBackground(Color.WHITE);
-//        drawingListPanel.setBorder(BorderFactory.createTitledBorder("그린 그림 목록"));
 
-        // 임시로 그림 데이터
+        // 임시로 그림 데이터 채워넣음
         for (int i = 1; i <= 10; i++) {
             JPanel drawingPanel = new JPanel();
             drawingPanel.setBackground(Color.WHITE);
