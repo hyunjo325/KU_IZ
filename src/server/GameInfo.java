@@ -109,7 +109,7 @@ public class GameInfo {
         List<String> availableWords = words.stream()
                 .filter(word -> !usedWords.contains(word))
                 .collect(Collectors.toList());
-
+        System.out.println("선택 가능한 단어들: " + availableWords);
         if (availableWords.isEmpty()) {
             // 모든 단어를 사용했다면 초기화
             usedWords.clear();
@@ -146,7 +146,7 @@ public class GameInfo {
                         // 라운드 종료 처리
                         String nextPresenter = selectRandomPresenter();
                         setCurrentPresenter(nextPresenter);
-                        String newWord = getRandomWord();
+//                        String newWord = getRandomWord();
                         // 모든 클라이언트에게 라운드 종료와 새로운 출제자 알림
                         synchronized(userVector) {
                             for (UserPair user : userVector) {
@@ -154,16 +154,16 @@ public class GameInfo {
                                 user.getPw().flush();
                             }
                         }
-                        synchronized(userVector) {
-                            for (UserPair user : userVector) {
-                                user.getPw().println("SUBJECT_WORD#" + currentPresenter + "#" + newWord);
-                                user.getPw().flush();
-                                /*if (user.getUsername().equals(currentPresenter)) {
-                                    user.getPw().println("SUBJECT_WORD#" + currentPresenter + "#" + newWord);
-                                    user.getPw().flush();
-                                }*/
-                            }
-                        }
+//                        synchronized(userVector) {
+//                            for (UserPair user : userVector) {
+//                                user.getPw().println("SUBJECT_WORD#" + currentPresenter + "#" + newWord);
+//                                user.getPw().flush();
+//                                /*if (user.getUsername().equals(currentPresenter)) {
+//                                    user.getPw().println("SUBJECT_WORD#" + currentPresenter + "#" + newWord);
+//                                    user.getPw().flush();
+//                                }*/
+//                            }
+//                        }
                         timeLeft = 120; // 다음 라운드를 위해 리셋
                     }
                     timeLeft--;
@@ -229,7 +229,7 @@ public class GameInfo {
         this.currentPresenter = null;
 
         // 사용된 단어 목록 초기화
-        this.usedWords.clear();
+//        this.usedWords.clear();
 
         // 타이머 관련 초기화
         this.timeLeft = 120;
