@@ -118,6 +118,7 @@ public class GameInfo {
 
         currentWord = availableWords.get(random.nextInt(availableWords.size()));
         usedWords.add(currentWord);
+        System.out.println(usedWords);
         return currentWord;
     }
 

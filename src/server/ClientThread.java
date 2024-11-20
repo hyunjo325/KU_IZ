@@ -145,7 +145,7 @@ public class ClientThread extends Thread {
                         String previousPresenter = game.getCurrentPresenter();
 
                         // 새 제시어 준비
-                        String word = game.getRandomWord();
+                        // String word = game.getRandomWord();
 
                         // 점수 처리
                         game.updateScore(username, 10);       // 정답자 점수
