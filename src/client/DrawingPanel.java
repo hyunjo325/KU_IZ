@@ -69,6 +69,9 @@ public class DrawingPanel extends JPanel implements MouseListener, MouseMotionLi
         }
         repaint();
     }
+    public Image getImg_buffer(){
+        return Img_buffer.getScaledInstance(getWidth()/5, getHeight()/5, Image.SCALE_SMOOTH);
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
 

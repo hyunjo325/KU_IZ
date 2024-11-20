@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.net.*;
 import java.io.*;
+import java.util.Vector;
 
 public class GameUI extends JPanel {
     private int currentRound;
@@ -35,7 +36,8 @@ public class GameUI extends JPanel {
     private JButton submitBtn;
     private JButton clearBtn;
     private UserData userData;
-
+    private Vector<Image> savedDrawings = new Vector<>();
+    private Vector<String> savedAnswers = new Vector<>();
 
     public GameUI(String quizTopic, List<String> players, boolean isPresenter, Socket sock, PrintWriter pw, BufferedReader br, UserData userdata) {
         this.quizTopic = quizTopic;
@@ -174,7 +176,7 @@ public class GameUI extends JPanel {
 
         submitBtn.addActionListener(e -> {
             if (!isPresenter && checkAnswer()) {
-                currentRound++;
+                //currentRound++;
                 startRound();
             }
         });
@@ -212,6 +214,8 @@ public class GameUI extends JPanel {
         SwingUtilities.invokeLater(() -> {
             answerInput.setEnabled(true);
 
+            savedDrawings.add(drawingPanel.getImg_buffer());
+            clearDrawingPanel();
             if (isCorrect) {
                 JOptionPane.showMessageDialog(this,
                         username + "님이 정답을 맞추셨습니다!",
@@ -230,15 +234,6 @@ public class GameUI extends JPanel {
                     clearBtn.setEnabled(true);
                     clearBtn.setVisible(true);
                 }
-
-                // 10라운드 체크
-                if (currentRound >= 10) {
-                    synchronized (pw) {
-                        pw.println("GAME_END");
-                        pw.flush();
-                    }
-                }
-                clearDrawingPanel();
             }
 
             // UI 갱신
@@ -248,14 +243,10 @@ public class GameUI extends JPanel {
     }
 
     public void startGame() {
-        currentRound = 1;
         startRound();
     }
 
     private void startRound() {
-        // 라운드 표시 업데이트
-        roundLabel.setText("ROUND " + currentRound);
-
         // 제한 시간 설정
         timeLeft = 120;
         timerLabel.setText("남은 시간 : " + timeLeft + "초");
@@ -270,7 +261,6 @@ public class GameUI extends JPanel {
 
             // 시간이 0이 되면 라운드 종료
             if (timeLeft <= 0) {
-                currentRound++;
                 startRound();
             }
         });
@@ -294,7 +284,7 @@ public class GameUI extends JPanel {
         topLabel.setOpaque(true);
         topLabel.setBackground(new Color(0x3B5998));
         topLabel.setForeground(Color.WHITE);
-        topLabel.setFont(new Font("defualt", Font.BOLD, 18));
+        topLabel.setFont(new Font("default", Font.BOLD, 18));
         topLabel.setPreferredSize(new Dimension(600, 40));
     }
 
@@ -351,6 +341,7 @@ public class GameUI extends JPanel {
 
     public void updateWord(String word) {
         SwingUtilities.invokeLater(() -> {
+            savedAnswers.add(word);
             if (isPresenter) {
                 wordLabel.setText("제시어: " + word);
             } else {
@@ -367,107 +358,14 @@ public class GameUI extends JPanel {
                     "라운드 종료",
                     JOptionPane.INFORMATION_MESSAGE);
 
-            currentRound++;
 
-            // 10라운드 체크
-            if (currentRound > 10) {
-                // 서버에 게임 종료 요청
-                synchronized (pw) {
-                    pw.println("GAME_END");
-                    pw.flush();
-                }
-            } else {
-                startRound();
-                // 새로운 출제자 설정
-                handlePresenterChange(newPresenter);
-                clearDrawingPanel();
-            }
+            startRound();
+            // 새로운 출제자 설정
+            handlePresenterChange(newPresenter);
+            clearDrawingPanel();
+
         });
     }
-//    public void showFinalResults(Map<String, Integer> finalScores, List<String> winners) {
-////        JPanel panel = new JPanel(new BorderLayout());
-////        panel.setBackground(Color.WHITE);
-////
-////        JLabel topLabel = new JLabel("방 개설", SwingConstants.CENTER);
-////        styleTopPanel(topLabel);
-////        panel.add(topLabel, BorderLayout.NORTH);
-//
-//        SwingUtilities.invokeLater(() -> {
-//            // 게임 UI 클리어
-//            removeAll();
-//            setLayout(new BorderLayout());
-//
-//            // 결과 패널 생성
-//            JPanel resultsPanel = new JPanel();
-//            resultsPanel.setBackground(Color.WHITE);
-//            resultsPanel.setLayout(new BoxLayout(resultsPanel, BoxLayout.Y_AXIS));
-//            resultsPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-//
-////            // 상단 패널
-////            JLabel topLabel = new JLabel("최종 순위", SwingConstants.CENTER);
-////            styleTopPanel(topLabel);
-////            resultsPanel.add(topLabel,BorderLayout.NORTH);
-//
-//            // 우승자 표시
-//            JLabel winnerLabel = new JLabel("우승자: " + String.join(", ", winners), SwingConstants.CENTER);
-//            wordLabel.setFont(new Font("default", Font.BOLD, 20));
-//            winnerLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-//            resultsPanel.add(winnerLabel);
-//            resultsPanel.add(Box.createVerticalStrut(20));
-//
-//            // 모든 플레이어 점수 표시
-//            JPanel scoresPanel = new JPanel(new GridLayout(0, 1, 5, 5));
-//            scoresPanel.setBorder(BorderFactory.createTitledBorder("최종 점수"));
-//
-//            // 점수 순으로 정렬
-//            finalScores.entrySet().stream()
-//                    .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-//                    .forEach(entry -> {
-//                        JLabel scoreLabel = new JLabel(
-//                                entry.getKey() + ": " + entry.getValue() + "점",
-//                                SwingConstants.CENTER
-//                        );
-//                        scoreLabel.setFont(new Font("default", Font.PLAIN, 18));
-//                        if (winners.contains(entry.getKey())) {
-//                            scoreLabel.setForeground(new Color(0x3B5998));
-//                            scoreLabel.setFont(scoreLabel.getFont().deriveFont(Font.BOLD));
-//                        }
-//                        scoresPanel.add(scoreLabel);
-//                    });
-//
-//            resultsPanel.add(scoresPanel);
-//
-//            // '그린 그림 보기' 버튼 추가
-//            JButton viewDrawingsBtn = new JButton("그린 그림 보기");
-//
-//            viewDrawingsBtn.setPreferredSize(new Dimension(100, 40));
-//            viewDrawingsBtn.setBackground(new Color(0x3B5998));
-//            viewDrawingsBtn.setForeground(Color.BLACK);
-//            viewDrawingsBtn.setFocusPainted(false);
-//
-//            viewDrawingsBtn.addActionListener(e -> {
-////                // System.out.println("그린 그림 보기 버튼 클릭됨");
-////                removeAll();
-////                add(showDrawingGalleryPanel(), BorderLayout.CENTER); // 그림 갤러리 패널 추가
-////                revalidate();
-////                repaint();
-////                // System.out.println("그린 그림 패널로 전환 완료");
-//
-//                SwingUtilities.invokeLater(() -> {
-//                    removeAll();
-//                    add(showDrawingGalleryPanel(), BorderLayout.CENTER);
-//                    revalidate();
-//                    repaint();
-//                });
-//            });
-//            resultsPanel.add(Box.createVerticalStrut(20));
-//            resultsPanel.add(viewDrawingsBtn);
-//
-//            add(resultsPanel, BorderLayout.CENTER);
-//            revalidate();
-//            repaint();
-//        });
-//    }
 
     public void showFinalResults(Map<String, Integer> finalScores, List<String> winners) {
         SwingUtilities.invokeLater(() -> {
@@ -565,20 +463,21 @@ public class GameUI extends JPanel {
         // 그림 목록 패널 생성 (2행 5열)
         JPanel drawingListPanel = new JPanel(new GridLayout(2, 5, 10, 10));
         drawingListPanel.setBackground(Color.WHITE);
-
+        System.out.println("savedAnswers"+savedAnswers);
         // 임시로 그림 데이터 채워넣음
-        for (int i = 1; i <= 10; i++) {
-            JPanel drawingPanel = new JPanel();
+        for (int i = 0; i < savedAnswers.size(); i++) {
+            JPanel drawingPanel = new JPanel(new BorderLayout());
             drawingPanel.setBackground(Color.WHITE);
-            drawingPanel.setBorder(BorderFactory.createTitledBorder("제시어: " + i));
+            drawingPanel.setBorder(BorderFactory.createTitledBorder(savedAnswers.get(i)));
             drawingPanel.setPreferredSize(new Dimension(100, 100));
-
-            JLabel placeholder = new JLabel("그림 " + i, SwingConstants.CENTER);
+            JLabel imageLabel = new JLabel(new ImageIcon(savedDrawings.get(i)));
+            drawingPanel.add(imageLabel, BorderLayout.CENTER);
+            /*JLabel placeholder = new JLabel("그림 " + i, SwingConstants.CENTER);
             placeholder.setPreferredSize(new Dimension(80, 80));
             placeholder.setOpaque(true);
             placeholder.setBackground(new Color(200, 200, 200));
 
-            drawingPanel.add(placeholder);
+            drawingPanel.add(placeholder);*/
             drawingListPanel.add(drawingPanel);
         }
 
@@ -606,7 +505,30 @@ public class GameUI extends JPanel {
 
         return galleryPanel;
     }
+    public void showDrawings(){
+        JPanel panel = new JPanel(new GridLayout(2, 5, 10, 10)); // 2줄 5칸, 간격 10px
 
+        // 이미지와 이름 추가
+        for (int i = 0; i < savedDrawings.size(); i++) {
+            // 이미지와 이름을 포함할 JPanel
+            JPanel imagePanel = new JPanel(new BorderLayout());
+
+            // 이미지 추가
+            JLabel imageLabel = new JLabel(new ImageIcon(savedDrawings.get(i)));
+            imagePanel.add(imageLabel, BorderLayout.CENTER);
+
+            // 이름 추가
+            JLabel nameLabel = new JLabel(savedAnswers.get(i), SwingConstants.CENTER);
+            imagePanel.add(nameLabel, BorderLayout.SOUTH);
+
+            panel.add(imagePanel);
+        }
+
+        // 패널을 프레임에 추가
+        add(panel, BorderLayout.CENTER);
+        revalidate();
+        repaint();
+    }
 
     public void handlePresenterDisconnected(String disconnectedUser) {
         SwingUtilities.invokeLater(() -> {
@@ -654,6 +576,7 @@ public class GameUI extends JPanel {
     public void updateRoundDisplay(int round) {
         SwingUtilities.invokeLater(() -> {
             roundLabel.setText("ROUND " + round);
+            currentRound = round;
         });
     }
 }

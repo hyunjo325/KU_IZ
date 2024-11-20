@@ -64,11 +64,15 @@ public class ClientThread extends Thread {
 
     private void sendGameWord() {
         String word = game.getRandomWord();
-        // 방장(그림 그리는 사람)에게만 제시어 전송
+        for (UserPair user : userVector) {
+            user.getPw().println("SUBJECT_WORD#" + username + "#" + word);
+            user.getPw().flush();
+        }
+        /*// 방장(그림 그리는 사람)에게만 제시어 전송
         if(userpair.getUsername().equals(game.getCurrentPresenter())){
             userpair.getPw().println("SUBJECT_WORD#" + username + "#" + word);
             userpair.getPw().flush();
-        }
+        }*/
     }
 
     public void run(){
@@ -158,20 +162,38 @@ public class ClientThread extends Thread {
                         String correctMessage = "CORRECT_ANSWER#" + username + "#10#" + game.getCurrentRound();
                         sendall(correctMessage);
 
-                        // 새로운 제시어 전송
-                        String subjectMessage = "SUBJECT_WORD#" + username + "#" + word;
-                        for (UserPair user : userVector) {
-                            if (user.getUsername().equals(username)) {
-                                user.getPw().println(subjectMessage);
-                                user.getPw().flush();
-                            }
-                        }
-
-                        // 라운드 업데이트 (한 번만 실행)
                         game.updateRound();
 
-                        // 타이머 리셋
-                        game.setupTimer();
+                        if(game.getCurrentRound() > 10) {
+                            // 최종 게임 결과 메시지 생성 및 전송
+                            String resultMessage = game.generateGameEndMessage();
+                            sendall(resultMessage);
+                            game.setRunning(false);
+                            game.reset();
+                            scores.clear();
+                        } else {
+                            // 새 제시어 준비
+                            String newWord = game.getRandomWord();
+
+                            // 출제자 변경
+                            game.setCurrentPresenter(username);
+
+                            // 새로운 제시어 전송
+                            String subjectMessage = "SUBJECT_WORD#" + username + "#" + newWord;
+                            for (UserPair user : userVector) {
+                                user.getPw().println(subjectMessage);
+                                user.getPw().flush();
+                                /*if (user.getUsername().equals(username)) {
+                                    user.getPw().println(subjectMessage);
+                                    user.getPw().flush();
+                                }*/
+                            }
+
+
+                            // 타이머 리셋
+                            game.setupTimer();
+
+                        }
                     } else {
                         sendself("WRONG_ANSWER#" + username);
                     }
