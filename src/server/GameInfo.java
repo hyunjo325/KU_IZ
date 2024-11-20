@@ -156,10 +156,12 @@ public class GameInfo {
                         }
                         synchronized(userVector) {
                             for (UserPair user : userVector) {
-                                if (user.getUsername().equals(currentPresenter)) {
+                                user.getPw().println("SUBJECT_WORD#" + currentPresenter + "#" + newWord);
+                                user.getPw().flush();
+                                /*if (user.getUsername().equals(currentPresenter)) {
                                     user.getPw().println("SUBJECT_WORD#" + currentPresenter + "#" + newWord);
                                     user.getPw().flush();
-                                }
+                                }*/
                             }
                         }
                         timeLeft = 120; // 다음 라운드를 위해 리셋
