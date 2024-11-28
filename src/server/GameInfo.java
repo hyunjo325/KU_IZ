@@ -139,11 +139,12 @@ public class GameInfo {
         if (availableWords.isEmpty()) {
             // 모든 단어를 사용했다면 초기화
             usedWords.clear();
-            availableWords = new ArrayList<>(words);
         }
 
         currentWord = availableWords.get(random.nextInt(availableWords.size()));
         usedWords.add(currentWord);
+        System.out.println("Used words:" + usedWords);
+        System.out.println("Available words" + availableWords);
         return currentWord;
     }
 
@@ -172,7 +173,7 @@ public class GameInfo {
                         // 라운드 종료 처리
                         String nextPresenter = selectRandomPresenter();
                         setCurrentPresenter(nextPresenter);
-                        String newWord = getRandomWord();
+//                        String newWord = getRandomWord();
                         // 모든 클라이언트에게 라운드 종료와 새로운 출제자 알림
                         synchronized(userVector) {
                             for (UserPair user : userVector) {
@@ -180,16 +181,16 @@ public class GameInfo {
                                 user.getPw().flush();
                             }
                         }
-                        synchronized(userVector) {
+/*                        synchronized(userVector) {
                             for (UserPair user : userVector) {
                                 user.getPw().println("SUBJECT_WORD#" + currentPresenter + "#" + newWord);
                                 user.getPw().flush();
-                                /*if (user.getUsername().equals(currentPresenter)) {
+                                *//*if (user.getUsername().equals(currentPresenter)) {
                                     user.getPw().println("SUBJECT_WORD#" + currentPresenter + "#" + newWord);
                                     user.getPw().flush();
-                                }*/
+                                }*//*
                             }
-                        }
+                        }*/
                         timeLeft = 120; // 다음 라운드를 위해 리셋
                     }
                     timeLeft--;
@@ -255,7 +256,7 @@ public class GameInfo {
         this.currentPresenter = null;
 
         // 사용된 단어 목록 초기화
-        this.usedWords.clear();
+//        this.usedWords.clear();
 
         // 타이머 관련 초기화
         this.timeLeft = 120;

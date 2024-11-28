@@ -144,9 +144,6 @@ public class ClientThread extends Thread {
                         // 이전 출제자(그림 그린 사람) 저장
                         String previousPresenter = game.getCurrentPresenter();
 
-                        // 새 제시어 준비
-                        // String word = game.getRandomWord();
-
                         // 점수 처리
                         game.updateScore(username, 10);       // 정답자 점수
                         game.updateScore(previousPresenter, 10); // 출제자 점수
@@ -169,7 +166,7 @@ public class ClientThread extends Thread {
                             String resultMessage = game.generateGameEndMessage();
                             sendall(resultMessage);
                             game.setRunning(false);
-                            game.reset();
+//                            game.reset();
                             scores.clear();
                         } else {
                             // 새 제시어 준비
@@ -188,8 +185,6 @@ public class ClientThread extends Thread {
                                     user.getPw().flush();
                                 }*/
                             }
-
-
                             // 타이머 리셋
                             game.setupTimer();
 
@@ -203,7 +198,7 @@ public class ClientThread extends Thread {
                     String resultMessage = game.generateGameEndMessage();
                     sendall(resultMessage);
                     game.setRunning(false);
-                    game.reset();
+//                    game.reset();
                     scores.clear();
                 }
 
@@ -226,7 +221,7 @@ public class ClientThread extends Thread {
                         String resultMessage = game.unexpectedGameEndMessage();
                         sendall(resultMessage);
                         game.setRunning(false);
-                        game.reset();
+//                        game.reset();
                         scores.clear();
                     }
                     else if (username.equals(game.getCurrentPresenter())) {
