@@ -139,6 +139,7 @@ public class GameInfo {
         if (availableWords.isEmpty()) {
             // 모든 단어를 사용했다면 초기화
             usedWords.clear();
+            availableWords = new ArrayList<>(words);
         }
 
         currentWord = availableWords.get(random.nextInt(availableWords.size()));
