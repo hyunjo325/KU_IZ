@@ -81,32 +81,6 @@ public class GameInfo {
         return resultMessage.toString();
     }
 
-    public String unexpectedGameEndMessage() {
-        StringBuilder resultMessage = new StringBuilder("FORCE_GAME_END");
-        int finishedRound = currentRound - 1;
-
-        // 몇 라운드에서 끝났는지 표기
-        resultMessage.append("#" + finishedRound);
-
-        // 모든 초기 플레이어의 점수를 포함
-        int maxScore = -1;
-        for (String player : initialPlayers) {
-            int score = gameScores.getOrDefault(player, 0);
-            resultMessage.append("#").append(player).append("#").append(score);
-            maxScore = Math.max(maxScore, score);
-        }
-
-        // 승자 찾기 (최고 점수를 가진 모든 플레이어)
-        resultMessage.append("#WIN");
-        for (String player : initialPlayers) {
-            if (gameScores.getOrDefault(player, 0) == maxScore) {
-                resultMessage.append("#").append(player);
-            }
-        }
-
-        return resultMessage.toString();
-    }
-
     // 점수 업데이트 메서드
     public void updateScore(String username, int points) {
         if (initialPlayers.contains(username)) {
@@ -135,7 +109,7 @@ public class GameInfo {
         List<String> availableWords = words.stream()
                 .filter(word -> !usedWords.contains(word))
                 .collect(Collectors.toList());
-
+        System.out.println("선택 가능한 단어들: " + availableWords);
         if (availableWords.isEmpty()) {
             // 모든 단어를 사용했다면 초기화
             usedWords.clear();
@@ -144,8 +118,6 @@ public class GameInfo {
 
         currentWord = availableWords.get(random.nextInt(availableWords.size()));
         usedWords.add(currentWord);
-        System.out.println("Used words:" + usedWords);
-        System.out.println("Available words" + availableWords);
         return currentWord;
     }
 
@@ -182,16 +154,16 @@ public class GameInfo {
                                 user.getPw().flush();
                             }
                         }
-/*                        synchronized(userVector) {
-                            for (UserPair user : userVector) {
-                                user.getPw().println("SUBJECT_WORD#" + currentPresenter + "#" + newWord);
-                                user.getPw().flush();
-                                *//*if (user.getUsername().equals(currentPresenter)) {
-                                    user.getPw().println("SUBJECT_WORD#" + currentPresenter + "#" + newWord);
-                                    user.getPw().flush();
-                                }*//*
-                            }
-                        }*/
+//                        synchronized(userVector) {
+//                            for (UserPair user : userVector) {
+//                                user.getPw().println("SUBJECT_WORD#" + currentPresenter + "#" + newWord);
+//                                user.getPw().flush();
+//                                /*if (user.getUsername().equals(currentPresenter)) {
+//                                    user.getPw().println("SUBJECT_WORD#" + currentPresenter + "#" + newWord);
+//                                    user.getPw().flush();
+//                                }*/
+//                            }
+//                        }
                         timeLeft = 120; // 다음 라운드를 위해 리셋
                     }
                     timeLeft--;
