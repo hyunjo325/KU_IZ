@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="feat: 사용자에게 IP 입력받기&#10;&#10;- 사용자에게 IP 입력 받은 후, 다른 컴퓨터에서도 통신 가능하게 수정">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+    <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="etc: 브랜치 충돌 해결">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -254,7 +253,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732863064672</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="etc: 브랜치 충돌 해결">
+      <option name="closed" value="true" />
+      <created>1732863500147</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1732863500147</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,7 +294,8 @@
     <MESSAGE value="etc" />
     <MESSAGE value="etc: 브랜치 병합" />
     <MESSAGE value="feat: 사용자에게 IP 입력받기&#10;&#10;- 사용자에게 IP 입력 받은 후, 다른 컴퓨터에서도 통신 가능하게 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 사용자에게 IP 입력받기&#10;&#10;- 사용자에게 IP 입력 받은 후, 다른 컴퓨터에서도 통신 가능하게 수정" />
+    <MESSAGE value="etc: 브랜치 충돌 해결" />
+    <option name="LAST_COMMIT_MESSAGE" value="etc: 브랜치 충돌 해결" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
