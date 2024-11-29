@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="feat: 색상버튼 비활성화 해결">
+    <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="etc: 브랜치 병합">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +50,7 @@
     "Application.server.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "hj",
+    "git-widget-placeholder": "chaeyuuu",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/user/Desktop/LJH/University/JAVA/Merge",
@@ -73,7 +75,7 @@
       <recent name="server" />
     </key>
   </component>
-  <component name="RunManager" selected="애플리케이션.Main">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="client.Main" />
       <module name="CatchMindClient" />
@@ -96,13 +98,13 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="애플리케이션.Main" />
-      <item itemvalue="애플리케이션.server.Main" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.server.Main" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="애플리케이션.Main" />
-        <item itemvalue="애플리케이션.server.Main" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.server.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -237,7 +239,15 @@
       <option name="project" value="LOCAL" />
       <updated>1732010330900</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="etc: 브랜치 병합">
+      <option name="closed" value="true" />
+      <created>1732862613616</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1732862613616</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,7 +277,9 @@
     <MESSAGE value="feat: 점수 보여주기까지 구현" />
     <MESSAGE value="feat: 그림 그리던 사람 연결 끊어지면 다른 사람으로 그리도록 구현" />
     <MESSAGE value="feat: 색상버튼 비활성화 해결" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: 색상버튼 비활성화 해결" />
+    <MESSAGE value="etc" />
+    <MESSAGE value="etc: 브랜치 병합" />
+    <option name="LAST_COMMIT_MESSAGE" value="etc: 브랜치 병합" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
