@@ -1,0 +1,69 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"2f73c9b4-8e82-4b76-b390-f14505e24b75\" name=\"변경\" comment=\"feat: 이주혁님 작성 코드 복붙\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/CatchMindClient/client/GameUI.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/CatchMindClient/client/GameUI.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/CatchMindClient/client/HostUI$1.class\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/CatchMindClient/client/HostUI$2.class\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/CatchMindClient/client/HostUI$3.class\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/CatchMindClient/client/HostUI.class\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/CatchMindClient/client/LobbyThread.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/CatchMindClient/client/LobbyThread.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/CatchMindClient/client/Main.class\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/CatchMindClient/server/ClientThread.class\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/CatchMindClient/server/GameInfo.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/client/GameUI.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/client/GameUI.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/client/HostUI.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/client/HostUI.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/client/LobbyThread.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/client/LobbyThread.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/client/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/client/Main.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/server/ClientThread.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/server/ClientThread.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/server/GameInfo.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/server/GameInfo.java\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"ComposerSettings\">\n    <execution />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"main\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectColorInfo\">{\n  &quot;associatedIndex&quot;: 7\n}</component>\n  <component name=\"ProjectId\" id=\"2oKeygR9cpyep4PjODUdDlIQ5Uh\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"Application.Main.executor\": \"Run\",\n    \"Application.server.Main.executor\": \"Run\",\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"git-widget-placeholder\": \"je\",\n    \"ignore.virus.scanning.warn.message\": \"true\",\n    \"kotlin-language-version-configured\": \"true\",\n    \"last_opened_file_path\": \"/Users/jungrlo/Desktop/KU_IZ\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"project.structure.last.edited\": \"모듈\",\n    \"project.structure.proportion\": \"0.0\",\n    \"project.structure.side.proportion\": \"0.0\",\n    \"settings.editor.selected.configurable\": \"File.Encoding\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"C:\\Users\\hyunj\\OneDrive\\바탕 화면\\4학년 2학기\\네트워크프로그래밍\\팀플\\CatchMindClient\\src\\server\" />\n      <recent name=\"C:\\Users\\user\\Desktop\\LJH\\University\\JAVA\\Network\\CatchMindClient\\src\" />\n    </key>\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\n      <recent name=\"server\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Application.Main\">\n    <configuration name=\"Main\" type=\"Application\" factoryName=\"Application\" singleton=\"false\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"client.Main\" />\n      <module name=\"CatchMindClient\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <configuration name=\"server.Main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"server.Main\" />\n      <module name=\"CatchMindClient\" />\n      <extension name=\"coverage\">\n        <pattern>\n          <option name=\"PATTERN\" value=\"server.*\" />\n          <option name=\"ENABLED\" value=\"true\" />\n        </pattern>\n      </extension>\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <list>\n      <item itemvalue=\"Application.Main\" />\n      <item itemvalue=\"Application.server.Main\" />\n    </list>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.Main\" />\n        <item itemvalue=\"Application.server.Main\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SharedIndexes\">\n    <attachedChunks>\n      <set>\n        <option value=\"jdk-19.0.2-corretto-19.0.2-4caba194b151-48ba4555\" />\n        <option value=\"jdk-22-openjdk-22-4caba194b151-f504ca98\" />\n      </set>\n    </attachedChunks>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"애플리케이션 수준\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"SvnConfiguration\">\n    <configuration>C:\\Users\\hyunj\\AppData\\Roaming\\Subversion</configuration>\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"디폴트 작업\">\n      <changelist id=\"2f73c9b4-8e82-4b76-b390-f14505e24b75\" name=\"변경\" comment=\"\" />\n      <created>1730622952263</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1730622952263</updated>\n      <workItem from=\"1731236255269\" duration=\"108000\" />\n      <workItem from=\"1731238266124\" duration=\"1021000\" />\n      <workItem from=\"1731239324471\" duration=\"45000\" />\n      <workItem from=\"1731239389886\" duration=\"1428000\" />\n      <workItem from=\"1731377240039\" duration=\"71000\" />\n      <workItem from=\"1731377332280\" duration=\"452000\" />\n      <workItem from=\"1731377797639\" duration=\"116000\" />\n      <workItem from=\"1731377924926\" duration=\"3056000\" />\n      <workItem from=\"1731382395341\" duration=\"1620000\" />\n      <workItem from=\"1731425002370\" duration=\"7000\" />\n      <workItem from=\"1731466085149\" duration=\"17560000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"변경\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1731239944261</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1731239944261</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"feat: 이주혁님 작성 코드 복붙\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1731377487432</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1731377487432</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"3\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"변경\" />\n    <MESSAGE value=\"feat: 이주혁님 작성 코드 복붙\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"feat: 이주혁님 작성 코드 복붙\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -57,28 +57,28 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "Application.Main.executor": "Run",
+-    "Application.server.Main.executor": "Run",
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "git-widget-placeholder": "je",
+-    "ignore.virus.scanning.warn.message": "true",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "/Users/jungrlo/Desktop/KU_IZ",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "project.structure.last.edited": "모듈",
+-    "project.structure.proportion": "0.0",
+-    "project.structure.side.proportion": "0.0",
+-    "settings.editor.selected.configurable": "File.Encoding",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
++    &quot;Application.server.Main.executor&quot;: &quot;Run&quot;,
++    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;je&quot;,
++    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;/Users/jungrlo/Desktop/KU_IZ&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;모듈&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
+       <recent name="C:\Users\hyunj\OneDrive\바탕 화면\4학년 2학기\네트워크프로그래밍\팀플\CatchMindClient\src\server" />
+@@ -115,6 +115,8 @@
+     </list>
+     <recent_temporary>
+       <list>
++        <item itemvalue="Application.Main" />
++        <item itemvalue="Application.server.Main" />
+         <item itemvalue="Application.Main" />
+         <item itemvalue="Application.server.Main" />
+       </list>
