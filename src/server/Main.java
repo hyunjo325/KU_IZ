@@ -27,6 +27,9 @@ public class Main {
                             usernum.set(1);
                             System.out.println("모든 사용자가 나갔습니다. 게임 정보가 초기화되었습니다.");
                         }
+                        else if (userVector.isEmpty()){
+                            usernum.set(1);
+                        }
                     } catch (InterruptedException e) {
                         System.out.println("Monitor thread interrupted: " + e);
                     }

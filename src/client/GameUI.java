@@ -367,7 +367,7 @@ public class GameUI extends JPanel {
         });
     }
 
-    public void showFinalResults(Map<String, Integer> finalScores, List<String> winners) {
+    public void showFinalResults(Map<String, Integer> finalScores, List<String> winners, int finishedRound) {
         SwingUtilities.invokeLater(() -> {
             // 게임 UI 클리어
             removeAll();
@@ -428,7 +428,7 @@ public class GameUI extends JPanel {
             viewDrawingsBtn.setFocusPainted(false);
             viewDrawingsBtn.addActionListener(e -> {
                 removeAll();
-                add(showDrawingGalleryPanel(), BorderLayout.CENTER);
+                add(showDrawingGalleryPanel(finishedRound), BorderLayout.CENTER);
                 revalidate();
                 repaint();
             });
@@ -449,7 +449,7 @@ public class GameUI extends JPanel {
         });
     }
 
-    private JPanel showDrawingGalleryPanel() {
+    private JPanel showDrawingGalleryPanel(int finishedRound) {
         // 메인 패널 생성
         JPanel galleryPanel = new JPanel(new BorderLayout());
         galleryPanel.setBorder(BorderFactory.createEmptyBorder(5, 0, 20, 0));
@@ -465,7 +465,7 @@ public class GameUI extends JPanel {
         drawingListPanel.setBackground(Color.WHITE);
         System.out.println("savedAnswers"+savedAnswers);
         // 임시로 그림 데이터 채워넣음
-        for (int i = 0; i < savedAnswers.size(); i++) {
+        for (int i = 0; i < finishedRound; i++) {
             JPanel drawingPanel = new JPanel(new BorderLayout());
             drawingPanel.setBackground(Color.WHITE);
             drawingPanel.setBorder(BorderFactory.createTitledBorder(savedAnswers.get(i)));
