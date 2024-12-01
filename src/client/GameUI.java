@@ -38,6 +38,7 @@ public class GameUI extends JPanel {
     private UserData userData;
     private Vector<Image> savedDrawings = new Vector<>();
     private Vector<String> savedAnswers = new Vector<>();
+    private String currentWord = null;
 
     public GameUI(String quizTopic, List<String> players, boolean isPresenter, Socket sock, PrintWriter pw, BufferedReader br, UserData userdata) {
         this.quizTopic = quizTopic;
@@ -213,7 +214,7 @@ public class GameUI extends JPanel {
     public void handleAnswerResult(String username, boolean isCorrect) {
         SwingUtilities.invokeLater(() -> {
             answerInput.setEnabled(true);
-
+            savedAnswers.add(currentWord);
             savedDrawings.add(drawingPanel.getImg_buffer());
             clearDrawingPanel();
             if (isCorrect) {
@@ -341,7 +342,7 @@ public class GameUI extends JPanel {
 
     public void updateWord(String word) {
         SwingUtilities.invokeLater(() -> {
-            savedAnswers.add(word);
+            currentWord = word;
             if (isPresenter) {
                 wordLabel.setText("제시어: " + word);
             } else {
@@ -358,6 +359,7 @@ public class GameUI extends JPanel {
                     "라운드 종료",
                     JOptionPane.INFORMATION_MESSAGE);
 
+            savedAnswers.add(currentWord);
             savedDrawings.add(drawingPanel.getImg_buffer());
             startRound();
             // 새로운 출제자 설정
@@ -532,9 +534,6 @@ public class GameUI extends JPanel {
 
     public void handlePresenterDisconnected(String disconnectedUser) {
         SwingUtilities.invokeLater(() -> {
-            synchronized (savedAnswers) {
-                savedAnswers.remove(savedAnswers.lastElement());
-            }
             JOptionPane.showMessageDialog(this,
                     disconnectedUser + "님의 연결이 끊어졌습니다.",
                     "출제자 연결 종료",
