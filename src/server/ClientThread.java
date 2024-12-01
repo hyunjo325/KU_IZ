@@ -239,10 +239,8 @@ public class ClientThread extends Thread {
                         // 3. 새로운 출제자에게 제시어 전송 (마지막에 실행)
                         synchronized(userVector) {
                             for (UserPair user : userVector) {
-                                if (user.getUsername().equals(newPresenter)) {
                                     user.getPw().println("SUBJECT_WORD#" + newPresenter + "#" + newWord);
                                     user.getPw().flush();
-                                }
                             }
                         }
 

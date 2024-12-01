@@ -532,6 +532,9 @@ public class GameUI extends JPanel {
 
     public void handlePresenterDisconnected(String disconnectedUser) {
         SwingUtilities.invokeLater(() -> {
+            synchronized (savedAnswers) {
+                savedAnswers.remove(savedAnswers.lastElement());
+            }
             JOptionPane.showMessageDialog(this,
                     disconnectedUser + "님의 연결이 끊어졌습니다.",
                     "출제자 연결 종료",
