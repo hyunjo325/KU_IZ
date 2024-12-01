@@ -149,6 +149,10 @@ public class LobbyThread extends Thread{
                                 JOptionPane.INFORMATION_MESSAGE);
                         hostUI.getGameUI().handlePresenterChange(newPresenter);
                         hostUI.getGameUI().handleTimeUp(newPresenter);
+                        hostUI.getGameUI().updateWord(parseLine[2]);
+                        hostUI.getGameUI().updateRoundDisplay(Integer.parseInt(parseLine[3]));
+                        hostUI.getGameUI().revalidate();
+                        hostUI.getGameUI().repaint();
                     }
                 }
                 if (parseLine[0].equals("GAME_END")) {

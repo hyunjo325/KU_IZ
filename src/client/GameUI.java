@@ -358,7 +358,7 @@ public class GameUI extends JPanel {
                     "라운드 종료",
                     JOptionPane.INFORMATION_MESSAGE);
 
-
+            savedDrawings.add(drawingPanel.getImg_buffer());
             startRound();
             // 새로운 출제자 설정
             handlePresenterChange(newPresenter);

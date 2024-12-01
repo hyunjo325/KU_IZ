@@ -174,11 +174,14 @@ public class GameInfo {
                         // 라운드 종료 처리
                         String nextPresenter = selectRandomPresenter();
                         setCurrentPresenter(nextPresenter);
-//                        String newWord = getRandomWord();
+                        String newWord = getRandomWord();
+                        currentRound++;
                         // 모든 클라이언트에게 라운드 종료와 새로운 출제자 알림
                         synchronized(userVector) {
                             for (UserPair user : userVector) {
-                                user.getPw().println("TIME_UP#" + currentPresenter);
+                                //user.getPw().println("TIME_UP#" + currentPresenter);
+                                user.getPw().println("TIME_UP#" + currentPresenter + "#" + newWord + "#" + currentRound);;
+
                                 user.getPw().flush();
                             }
                         }
