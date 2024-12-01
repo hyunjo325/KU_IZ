@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="feat: 라운드 버그 수정 및 그림 목록 구현">
+    <list default="true" id="2f73c9b4-8e82-4b76-b390-f14505e24b75" name="변경" comment="feat: 버그 수정2.2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/GameUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/GameUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/ClientThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/ClientThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/GameInfo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -248,7 +247,23 @@
       <option name="project" value="LOCAL" />
       <updated>1732864047053</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="feat: 버그 수정2.1">
+      <option name="closed" value="true" />
+      <created>1733066774835</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1733066774835</updated>
+    </task>
+    <task id="LOCAL-00015" summary="feat: 버그 수정2.2">
+      <option name="closed" value="true" />
+      <created>1733067380221</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1733067380221</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -279,7 +294,9 @@
     <MESSAGE value="feat: 그림 그리던 사람 연결 끊어지면 다른 사람으로 그리도록 구현" />
     <MESSAGE value="feat: 색상버튼 비활성화 해결" />
     <MESSAGE value="etc: 브랜치 충돌 해결" />
-    <option name="LAST_COMMIT_MESSAGE" value="etc: 브랜치 충돌 해결" />
+    <MESSAGE value="feat: 버그 수정2.1" />
+    <MESSAGE value="feat: 버그 수정2.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: 버그 수정2.2" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
